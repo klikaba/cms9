@@ -1,0 +1,2 @@
+class PostDefinition < ApplicationRecord
+end
