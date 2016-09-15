@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20160914193039) do
   create_table "post_fields", force: :cascade do |t|
     t.integer  "post_definition_id"
     t.string   "name"
-    t.string   "type"
+    t.string   "field_type"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.index ["post_definition_id"], name: "index_post_fields_on_post_definition_id"

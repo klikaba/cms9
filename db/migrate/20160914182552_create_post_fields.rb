@@ -3,7 +3,7 @@ class CreatePostFields < ActiveRecord::Migration[5.0]
     create_table :post_fields do |t|
       t.references :post_definition, foreign_key: true
       t.string :name
-      t.string :type
+      t.string :field_type
       t.timestamps
     end
   end
