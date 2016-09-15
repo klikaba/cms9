@@ -1,0 +1,2 @@
+module PostDefinitionsHelper
+end
