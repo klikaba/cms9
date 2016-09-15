@@ -13,6 +13,10 @@ class PostDefinitionsController < ApplicationController
     redirect_to post_definitions_path
   end
 
+  def edit
+    @post = PostDefinition.find(params[:id])
+  end
+
   def show
     @post = PostDefinition.find(params[:id])
   end
