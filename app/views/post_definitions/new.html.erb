@@ -1,13 +1,14 @@
-<h2>New Post Definition</h2>
+<%= link_to 'Back', post_definitions_path, { class: 'btn btn-secondary', style: 'margin-bottom: 30px'} %>
+
+<h3>New Post Definition</h3>
+
 <%= form_for :post_definition, url: post_definitions_path do |f| %>
     <p>
       <%= f.label :name %><br>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, class: "form-control"%>
     </p>
 
     <p>
-      <%= f.submit %>
+      <%= f.submit class: 'btn btn-secondary' %>
     </p>
 <% end %>
-
-<%= link_to 'Back', post_definitions_path %>
