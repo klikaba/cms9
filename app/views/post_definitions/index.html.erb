@@ -1,0 +1,15 @@
+<h2>List all Post Definitions</h2>
+
+<%= link_to 'New Post Definition', new_post_definition_path %>
+
+<% @posts.each do |post| %>
+    <div style="margin-top: 10px; margin-bottom: 10px; border-bottom: 1px solid #d0d5d8">
+      <span><%= post.name %></span>
+      <div style="display: inline-block; float: right; margin-right: 80%;">
+        <%= link_to 'Show', post_definition_path(post) %>
+        <%= link_to 'Delete', post_definition_path(post),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+<% end %>
