@@ -1,3 +1,3 @@
 class Post < ApplicationRecord
-  belongs_to :post_definition
+  has_many :post_definition
 end
