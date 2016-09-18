@@ -1,4 +1,5 @@
 <%= link_to 'New Post Definition', new_post_definition_path, { class: 'btn btn-secondary', style: 'margin-bottom: 30px'}%>
+<hr/>
 
 <h3>List Post Definitions</h3>
 
@@ -6,9 +7,7 @@
     <div style="margin-top: 10px; margin-bottom: 10px; border-bottom: 1px solid #d0d5d8; padding: 10px 0 10px 0;">
       <span><%= post.name %></span>
       <div style="display: inline-block; float: right; margin-right: 60%;">
-        <%= link_to "Show", post_definition_path(post),
-                      class: 'btn btn-secondary btn-sm'%>
-        <%= link_to "Edit", post_definition_path(post),
+        <%= link_to "Edit", edit_post_definition_path(post),
                       class: 'btn btn-secondary btn-sm'%>
         <%= link_to "Delete", post_definition_path(post),
                       method: :delete,

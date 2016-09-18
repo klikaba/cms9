@@ -1,1 +1,39 @@
 <%= link_to 'Back', post_definitions_path, { class: 'btn btn-secondary', style: 'margin-bottom: 30px'} %>
+<hr/>
+
+<h3><%= @post.name %></h3>
+
+<div class="row">
+  <%= form_for :post, url: post_definition_path(@post), method: :patch do |f| %>
+      <div class="col-md-9">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class: "form-control"%>
+      </div>
+
+      <div class="col-md-3">
+        <%= f.submit class: 'btn btn-secondary', style: 'margin-top: 30px;'%>
+      </div>
+
+  <% end %>
+</div>
+
+<div class="row" style="margin-top: 30px;">
+  <div class="col-md-12">
+    <h4>Fields</h4>
+    <%= link_to 'Add Field', post_field_path(@post.id, field_id: nil, type: 'new', post: @post.name), { class: 'btn btn-secondary', style: 'margin-bottom: 30px; margin-top: 15px'} %>
+    <% @post_fields.each do |field| %>
+        <div style="margin-bottom: 10px; border-bottom: 1px solid #d0d5d8; padding: 10px 0 10px 0;">
+          <span>Name: <%= field.name %></span> |
+          <span>Type: <%= field.field_type %></span>
+          <div style="display: inline-block; float: right; margin-right: 60%;">
+            <%= link_to "Edit", post_field_path(@post.id, field_name: field.name, field_id: field.id, type: field.field_type, post: @post.name),
+                        class: 'btn btn-secondary btn-sm'%>
+            <%= link_to "Delete", post_field_path(field),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' },
+                        class: 'btn btn-secondary btn-sm'%>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
