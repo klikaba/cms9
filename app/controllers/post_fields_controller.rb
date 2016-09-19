@@ -4,15 +4,15 @@ class PostFieldsController < ApplicationController
     @post.post_definition_id = params[:id]
     @post_name = params[:post]
 
-    if params[:type] != 'new'
+    @all_types = ['Text', 'Text Area']
+
+    if @all_types.index(params[:type]) != nil
       @post.field_type = params[:type]
     end
 
     if params[:field_name] != nil
       @post.name = params[:field_name]
     end
-
-    @all_types = ['String', 'Integer']
   end
 
   def create

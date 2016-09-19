@@ -7,7 +7,7 @@
         <%= f.label :name %><br>
         <%= f.text_field :name, class: "form-control"%>
         <%= f.label :field_type %><br>
-        <%= f.text_field :field_type, class: "form-control"%>
+        <%= f.select :field_type, @all_types, { prompt: 'Select Type' }, { class: 'form-control' } %>
         <%= f.hidden_field :post_definition_id %>
         <%= f.submit "Create Post field", class: 'btn btn-secondary', style: 'margin-top: 30px;' %>
     <% end %>
@@ -17,7 +17,7 @@
         <%= f.label :name %><br>
         <%= f.text_field :name, class: "form-control"%>
         <%= f.label :field_type %><br>
-        <%= f.text_field :field_type, class: "form-control"%>
+        <%= f.select :field_type, @all_types, { prompt: 'Select Type' }, { class: 'form-control' } %>
         <%= f.hidden_field :post_definition_id %>
         <%= f.submit "Update Post field", class: 'btn btn-secondary', style: 'margin-top: 30px;' %>
     <% end %>
