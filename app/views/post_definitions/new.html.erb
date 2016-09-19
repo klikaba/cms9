@@ -3,15 +3,13 @@
 
 <h3>New Post Definition</h3>
 
-<%= form_for :post_definition, url: post_definitions_path do |f| %>
+<%= form_for @post do |f| %>
 
     <div class="form-group">
       <%= f.label :name %><br>
       <%= f.text_field :name, class: "form-control"%>
     </div>
 
-    <p>
-      <%= f.submit class: 'btn btn-secondary' %>
-    </p>
+    <%= f.submit class: 'btn btn-secondary' %>
 
 <% end %>

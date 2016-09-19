@@ -1,3 +1,7 @@
 class PostField < ApplicationRecord
-  has_many :post_definition
+  belongs_to :post_definition
+
+  def self.all_types
+    return ['Text', 'Text Area']
+  end
 end

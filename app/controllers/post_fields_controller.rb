@@ -1,12 +1,15 @@
 class PostFieldsController < ApplicationController
-  def show
+  def new
     @post = PostField.new
-    @post.post_definition_id = params[:id]
+    @post.post_definition_id = params[:post_definition_id]
+    @post_name = params[:post]
+  end
+
+  def edit
+    @post = PostField.find(params[:id])
     @post_name = params[:post]
 
-    @all_types = ['Text', 'Text Area']
-
-    if @all_types.index(params[:type]) != nil
+    if PostField.all_types.index(params[:type]) != nil
       @post.field_type = params[:type]
     end
 
@@ -16,14 +19,11 @@ class PostFieldsController < ApplicationController
   end
 
   def create
-    @post = PostField.new(post_field_params)
+    @field = PostField.new(post_field_params)
 
-    if @post.save
-      redirect_to edit_post_definition_path(:id => @post.post_definition_id)
+    if @field.save
+      redirect_to edit_post_definition_path(:id => @field.post_definition_id)
     end
-  end
-
-  def edit
   end
 
   def update
