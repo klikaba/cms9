@@ -29,11 +29,14 @@
               <div class="col-md-3">
                 <span>Name: <%= field.name %></span>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <span>Type: <%= field.field_type %></span>
               </div>
+              <div class="col-md-3">
+                <span>Required: <%= field.required %></span>
+              </div>
 
-              <div class="col-md-5" style="display: inline-block;">
+              <div class="col-md-3" style="display: inline-block;">
                 <%= link_to "Edit", edit_post_field_path(field, { post: @post.name }),
                             class: 'btn btn-secondary btn-sm'%>
                 <%= link_to "Delete", post_field_path(field),

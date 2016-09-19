@@ -2,7 +2,6 @@ class PostFieldsController < ApplicationController
   def new
     @post = PostField.new
     @post.post_definition_id = params[:post_definition_id]
-    @post_name = params[:post]
   end
 
   def edit
@@ -43,6 +42,6 @@ class PostFieldsController < ApplicationController
 
   private
     def post_field_params
-      params.require(:post_field).permit(:name, :field_type, :post_definition_id)
+      params.require(:post_field).permit(:name, :field_type, :post_definition_id, :required)
     end
 end

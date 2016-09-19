@@ -23,11 +23,11 @@
             <span class="caret"></span>
           </a>
           <div class="dropdown-menu">
-            <% @nav_list.each do |post| %>
+            <% PostDefinition.all.each do |post| %>
                 <a href="#" class="dropdown-item">
                   <%= post.name %>
                 </a>
-                <% if post != @nav_list.last %>
+                <% if post != PostDefinition.all.last %>
                     <div class="dropdown-divider"></div>
                 <% end %>
             <% end %>
