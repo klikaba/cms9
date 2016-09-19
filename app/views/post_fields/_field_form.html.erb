@@ -1,0 +1,8 @@
+<%= form_for @post do |f| %>
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: "form-control"%>
+    <%= f.label :field_type %><br>
+    <%= f.select :field_type, PostField.all_types, { prompt: 'Select Type' }, { class: 'form-control' } %>
+    <%= f.hidden_field :post_definition_id %>
+    <%= f.submit class: 'btn btn-secondary', style: 'margin-top: 30px;' %>
+<% end %>

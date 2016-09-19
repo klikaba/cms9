@@ -4,11 +4,11 @@ class PostDefinitionsController < ApplicationController
   end
 
   def new
+    @post = PostDefinition.new
   end
 
   def edit
     @post = PostDefinition.find(params[:id])
-    @post_fields = PostField.where(post_definition_id: params[:id]).to_a
   end
 
   def create
@@ -24,7 +24,7 @@ class PostDefinitionsController < ApplicationController
   def update
     @post = PostDefinition.find(params[:id])
 
-    if @post.update(post_params)
+    if @post.update(post_definition_params)
       redirect_to post_definitions_path
     else
       render 'edit'
@@ -41,9 +41,5 @@ class PostDefinitionsController < ApplicationController
   private
     def post_definition_params
       params.require(:post_definition).permit(:name)
-    end
-
-    def post_params
-      params.require(:post).permit(:name)
     end
 end
