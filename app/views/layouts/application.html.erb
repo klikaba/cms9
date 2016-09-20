@@ -21,12 +21,12 @@
           <a class="nav-link" href="/posts">Posts</a>
         </li>
         <li class="nav-item dropdown <%= 'active' if params[:controller] == 'posts' && (params[:action] == 'new' || params[:action] == 'edit') %>">
-          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <a href="#" class="dropdown-toggle nav-link <%= 'disabled' if @nav_list.size == 0 %>" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             Create Post
             <span class="caret"></span>
           </a>
           <div class="dropdown-menu">
-            <% PostDefinition.all.each do |post| %>
+            <% @nav_list.each do |post| %>
                 <%= link_to post.name, new_post_path(type: post.name, post_definition_id: post.id), { class: 'dropdown-item' } %>
                 <% if post != PostDefinition.all.last %>
                     <div class="dropdown-divider"></div>

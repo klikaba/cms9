@@ -37,6 +37,9 @@ class PostFieldsController < ApplicationController
     @field = PostField.find(params[:id])
     @field.destroy
 
+    #@field_values = Field.where(post_field_id: params[:id])
+    #@field_values.destroy_all
+
     redirect_to request.referrer
   end
 
