@@ -2,7 +2,7 @@
     <%= f.label :name %><br>
     <%= f.text_field :name, class: "form-control"%>
     <%= f.label :field_type %><br>
-    <%= f.select :field_type, PostField.all_types, { prompt: 'Select Type' }, { class: 'form-control' } %>
+    <%= f.select :field_type, PostField.all_types, { prompt: 'Select Type' }, { class: 'form-control', disabled: edit } %>
     <div class="checkbox" style="margin-top: 10px;">
       <span style="margin-right: 10px;">Required</span>
       <%= hidden_field_tag :required, false %>
