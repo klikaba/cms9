@@ -17,16 +17,17 @@
         <li class="nav-item <%= 'active' if params[:controller] == 'post_definitions' %>">
           <a class="nav-link" href="/post_definitions">Post Definitions</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item <%= 'active' if params[:controller] == 'posts' && params[:action] == 'index' %>">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li>
+        <li class="nav-item dropdown <%= 'active' if params[:controller] == 'posts' && (params[:action] == 'new' || params[:action] == 'edit') %>">
           <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             Create Post
             <span class="caret"></span>
           </a>
           <div class="dropdown-menu">
             <% PostDefinition.all.each do |post| %>
-                <a href="#" class="dropdown-item">
-                  <%= post.name %>
-                </a>
+                <%= link_to post.name, new_post_path(type: post.name, post_definition_id: post.id), { class: 'dropdown-item' } %>
                 <% if post != PostDefinition.all.last %>
                     <div class="dropdown-divider"></div>
                 <% end %>

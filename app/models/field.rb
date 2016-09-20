@@ -1,4 +1,4 @@
 class Field < ApplicationRecord
-  has_many :post
-  has_many :post_field
+  belongs_to :post_field
+  belongs_to :post, optional: true
 end
