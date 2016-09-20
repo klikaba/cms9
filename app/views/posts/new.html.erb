@@ -2,23 +2,4 @@
   <%= params[:type] %>
 </h3>
 
-<%= form_for @post do |f| %>
-  <%= f.hidden_field :post_definition_id %>
-
-  <%= f.fields_for :fields do |field| %>
-      <%= field.hidden_field :post_id %>
-      <%= field.hidden_field :post_field_id %>
-
-      <% if field.object.post_field.field_type == 'Text' %>
-        <%= field.label field.object.post_field.name %>
-        <%= field.text_field :value, class: 'form-control'%>
-      <% elsif field.object.post_field.field_type == 'Text Area'%>
-        <%= field.label field.object.post_field.name %>
-        <%= field.text_area :value, class: 'form-control'%>
-      <% end %>
-
-  <% end %>
-
-  <%= f.submit class: 'btn btn-secondary', style: 'margin-top: 30px;' %>
-
-<% end %>
+<%= render 'post_form' %>
