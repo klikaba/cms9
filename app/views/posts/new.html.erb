@@ -7,7 +7,6 @@
 
   <%= f.fields_for :fields do |field| %>
       <%= field.hidden_field :post_id %>
-
       <%= field.hidden_field :post_field_id %>
 
       <% if field.object.post_field.field_type == 'Text' %>

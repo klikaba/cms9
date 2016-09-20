@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :post_definition
-  has_many   :fields
+  has_many   :fields, dependent: :destroy
 
-  accepts_nested_attributes_for :fields, allow_destroy: true
+  accepts_nested_attributes_for :fields
 end

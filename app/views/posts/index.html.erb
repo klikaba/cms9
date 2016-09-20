@@ -1,8 +1,14 @@
+<h3>List Posts</h3>
+
 <% @posts.each do |post| %>
     <div style="margin-top: 10px; margin-bottom: 10px; border-bottom: 1px solid #d0d5d8; padding: 10px 0 10px 0;">
-      <span><%= post.post_definition_id %></span>
+      <span><%= post.post_definition.name %></span>
       <div style="display: inline-block; float: right; margin-right: 60%;">
         <%= link_to "Edit", edit_post_path(post),
+                      class: 'btn btn-secondary btn-sm'%>
+        <%= link_to "Delete", post_path(post),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' },
                       class: 'btn btn-secondary btn-sm'%>
       </div>
     </div>
