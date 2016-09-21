@@ -5,6 +5,21 @@
 
 <div class="row">
   <%= form_for @post do |f| %>
+
+      <% if @post.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(@post.errors.count, "error") %> prohibited
+              this article from being saved:
+            </h2>
+            <ul>
+              <% @post.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
       <div class="col-md-9">
         <%= f.label :name %><br>
         <%= f.text_field :name, class: "form-control"%>
@@ -29,11 +44,14 @@
               <div class="col-md-3">
                 <span>Name: <%= field.name %></span>
               </div>
-              <div class="col-md-4">
-                <span>Type: <%= field.field_type %></span>
+              <div class="col-md-3">
+                <span>Type: <%= type_formatter(field.field_type) %></span>
+              </div>
+              <div class="col-md-3">
+                <span>Required: <%= field.required %></span>
               </div>
 
-              <div class="col-md-5" style="display: inline-block;">
+              <div class="col-md-3" style="display: inline-block;">
                 <%= link_to "Edit", edit_post_field_path(field, { post: @post.name }),
                             class: 'btn btn-secondary btn-sm'%>
                 <%= link_to "Delete", post_field_path(field),

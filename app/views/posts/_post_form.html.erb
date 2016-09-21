@@ -1,0 +1,12 @@
+<%= form_for @post do |f| %>
+  <%= f.hidden_field :post_definition_id %>
+
+  <%= f.fields_for :fields do |field| %>
+      <%= field.hidden_field :post_id %>
+      <%= field.hidden_field :post_field_id %>
+      <%= render 'posts/inputs/' + field.object.post_field.field_type, field: field %>
+  <% end %>
+
+  <%= f.submit class: 'btn btn-secondary', style: 'margin-top: 30px;' %>
+
+<% end %>

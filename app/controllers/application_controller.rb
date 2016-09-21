@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :navigation
 
   private
-    def navigation
-      @nav_list = PostDefinition.all
-    end
+   def navigation
+     @nav_list = PostDefinition.all
+   end
 end
