@@ -1,6 +1,28 @@
-# README
+# Cms9
+Short description and motivation.
 
-Yay! You’re on Rails!
+## Usage
+How to use my plugin.
 
-* Rails version: 5.0.0.1
-* Ruby version: 2.3.1
+## Installation
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'cms9'
+```
+
+And then execute:
+```bash
+$ bundle
+```
+
+Or install it yourself as:
+```bash
+$ gem install cms9
+```
+
+## Contributing
+Contribution directions go here.
+
+## License
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
