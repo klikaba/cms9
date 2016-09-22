@@ -25,10 +25,17 @@ Gem::Specification.new do |s|
   s.add_dependency "jbuilder", "~> 2.5"
   s.add_dependency "bootstrap", "~> 4.0.0.alpha4"
   s.add_dependency "rails-assets-tether", ">= 1.1.0"
+  s.add_dependency "wysiwyg-rails"
 
+  s.add_development_dependency "puma", "~> 3.0"
+  s.add_development_dependency "sass-rails", "~> 5.0"
+  s.add_development_dependency "uglifier", ">= 1.3.0"
+  s.add_development_dependency "coffee-rails", "~> 4.2"
   s.add_development_dependency "jquery-rails"
+  s.add_development_dependency "jbuilder", "~> 2.5"
   s.add_development_dependency "bootstrap", "~> 4.0.0.alpha4"
   s.add_development_dependency "rails-assets-tether", ">= 1.1.0"
+  s.add_development_dependency "wysiwyg-rails"
 
   s.add_development_dependency "web-console"
   s.add_development_dependency "listen", "~> 3.0.5"
