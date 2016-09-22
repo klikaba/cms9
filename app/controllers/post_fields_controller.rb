@@ -19,6 +19,18 @@ class PostFieldsController < ApplicationController
 
   def create
     @field = PostField.new(post_field_params)
+    @field.multiple_choices = ''
+    values = params[:multi_values]
+
+    values.each_with_index do |value, index|
+      if value != ''
+        if index == 0
+          @field.multiple_choices = value
+        elsif
+          @field.multiple_choices = @field.multiple_choices + ',' + value
+        end
+      end
+    end
 
     if @field.save
       redirect_to edit_post_definition_path(:id => @field.post_definition_id)
@@ -45,6 +57,6 @@ class PostFieldsController < ApplicationController
 
   private
     def post_field_params
-      params.require(:post_field).permit(:name, :field_type, :post_definition_id, :required)
+      params.require(:post_field).permit(:name, :field_type, :post_definition_id, :required, :multiple_choices)
     end
 end
