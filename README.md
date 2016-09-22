@@ -1,8 +1,7 @@
 # Cms9
-Short description and motivation.
 
 ## Usage
-How to use my plugin.
+How to use Cms9 plugin.
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -21,8 +20,10 @@ Or install it yourself as:
 $ gem install cms9
 ```
 
-## Contributing
-Contribution directions go here.
+And then execute:
+```bash
+$ rails db:migrate
+```
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
