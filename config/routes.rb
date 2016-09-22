@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Cms9::Engine.routes.draw do
   resources :post_definitions
   resources :post_fields
   resources :posts do
