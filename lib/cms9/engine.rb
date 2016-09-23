@@ -9,21 +9,16 @@ module Cms9
         end
     end
 
-    config.assets.paths << File.expand_path("../../assets/stylesheets", __FILE__)
-    config.assets.paths << File.expand_path("../../assets/javascripts", __FILE__)
-    config.assets.precompile += %w( cms9.css )
-    config.assets.precompile += %w( cms9.js )
-
-    # paths["app"]                 # => ["app"]
-    # paths["app/controllers"]     # => ["app/controllers"]
-    # paths["app/helpers"]         # => ["app/helpers"]
-    # paths["app/models"]          # => ["app/models"]
-    # paths["app/views"]           # => ["app/views"]
-    # paths["lib"]                 # => ["lib"]
-    # paths["lib/tasks"]           # => ["lib/tasks"]
-    # paths["config"]              # => ["config"]
-    # paths["config/initializers"] # => ["config/initializers"]
-    # paths["config/locales"]      # => ["config/locales"]
-    # paths["config/routes.rb"]    # => ["config/routes.rb"]
+    paths["app"]                 # => ["app"]
+    paths["app/controllers"]     # => ["app/controllers"]
+    paths["app/helpers"]         # => ["app/helpers"]
+    paths["app/models"]          # => ["app/models"]
+    paths["app/views"]           # => ["app/views"]
+    paths["lib"]                 # => ["lib"]
+    paths["lib/tasks"]           # => ["lib/tasks"]
+    paths["config"]              # => ["config"]
+    paths["config/initializers"] # => ["config/initializers"]
+    paths["config/locales"]      # => ["config/locales"]
+    paths["config/routes.rb"]    # => ["config/routes.rb"]
   end
 end
