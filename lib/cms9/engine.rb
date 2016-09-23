@@ -11,7 +11,7 @@ module Cms9
 
     config.Cms9 = ActiveSupport::OrderedOptions.new
     initializer 'cms9.configuration' do |app|
-      if app.config.my_engine[:mounted_path]
+      if app.config.cms9[:mounted_path]
         app.routes.append do
           mount Cms9::Engine => app.config.cms9[:mounted_path]
         end
