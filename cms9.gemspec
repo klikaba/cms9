@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["SamirHodzic"]
   s.email       = ["samir.sgd@gmail.com"]
   s.homepage    = "http://www.klika.ba"
-  s.summary     = "Summary of Cms9."
-  s.description = "Description of Cms9."
+  s.summary     = "Cms9"
+  s.description = "Small CMS Admin module for Rails"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
