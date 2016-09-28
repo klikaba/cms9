@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cms9</title>
+    <%= stylesheet_link_tag "cms9/application", media: "all" %>
+    <%= javascript_include_tag "cms9/application" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+      <a class="navbar-brand" href="#">Cms9</a>
+      <ul class="nav navbar-nav">
+        <li class="nav-item <%= 'active' if params[:controller] == 'cms9/welcome' %>">
+          <%= link_to 'Home', root_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item <%= 'active' if params[:controller] == 'cms9/post_definitions' %>">
+          <%= link_to 'Post Definitions', post_definitions_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item <%= 'active' if params[:controller] == 'cms9/posts' && params[:action] == 'index' %>">
+          <%= link_to 'Posts', posts_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item dropdown <%= 'active' if params[:controller] == 'cms9/posts' && (params[:action] == 'new' || params[:action] == 'edit') %>">
+          <a href="#" class="dropdown-toggle nav-link <%= 'disabled' if Cms9::PostDefinition.all.size == 0 %>" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            Create Post
+            <span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            <% Cms9::PostDefinition.all.each do |post| %>
+                <%= link_to post.name, new_post_path(type: post.name, post_definition_id: post.id), { class: 'dropdown-item' } %>
+                <% if post != Cms9::PostDefinition.all.last %>
+                    <div class="dropdown-divider"></div>
+                <% end %>
+            <% end %>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

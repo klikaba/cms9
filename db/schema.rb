@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20160922081450) do
 
-  create_table "fields", force: :cascade do |t|
+  create_table "cms9_fields", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "post_field_id"
     t.string   "value"
@@ -22,13 +22,13 @@ ActiveRecord::Schema.define(version: 20160922081450) do
     t.index ["post_id"], name: "index_fields_on_post_id"
   end
 
-  create_table "post_definitions", force: :cascade do |t|
+  create_table "cms9_post_definitions", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "post_fields", force: :cascade do |t|
+  create_table "cms9_post_fields", force: :cascade do |t|
     t.integer  "post_definition_id"
     t.string   "name"
     t.string   "field_type"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20160922081450) do
     t.index ["post_definition_id"], name: "index_post_fields_on_post_definition_id"
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "cms9_posts", force: :cascade do |t|
     t.integer  "post_definition_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
