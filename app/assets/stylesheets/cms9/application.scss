@@ -1,10 +1,8 @@
+@import "bootstrap-sprockets";
 @import "bootstrap";
+@import "paper-dashboard";
 @import "froala_editor.min";
 @import "froala_style.min";
 @import "font-awesome";
 @import "welcome";
 @import "post_definitions";
-
-body {
-  padding-top: 5rem;
-}

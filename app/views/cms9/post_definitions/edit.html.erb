@@ -1,9 +1,7 @@
-<%= link_to 'Back', post_definitions_path, { class: 'btn btn-secondary', style: 'margin-bottom: 30px'} %>
-<hr/>
+<%= link_to 'Back', post_definitions_path, { class: 'btn btn-info btn-fill', style: 'float: right;'} %>
 
-<h3><%= @post.name %></h3>
-
-<div class="row">
+<div class="container-fluid" style="margin-bottom: 30px;">
+  <h3><%= @post.name %></h3>
   <%= form_for @post do |f| %>
 
       <% if @post.errors.any? %>
@@ -20,48 +18,47 @@
           </div>
       <% end %>
 
-      <div class="col-md-9">
+      <div class="col-md-9" style="padding: 0;">
         <%= f.label :name %><br>
         <%= f.text_field :name, class: "form-control"%>
       </div>
 
-      <div class="col-md-3">
-        <%= f.submit class: 'btn btn-secondary', style: 'margin-top: 30px;'%>
+      <div class="col-md-3" style="padding: 0;">
+        <%= f.submit class: 'btn btn-secondary', style: 'margin-top: 28px; margin-left: 15px;'%>
       </div>
 
   <% end %>
 </div>
 
-<div class="row" style="margin-top: 30px;">
-  <div class="col-md-12">
+<div class="container-fluid" style="margin-top: 10px; border-top: 1px solid rgba(102, 97, 91, 0.3);">
     <h4>Fields</h4>
     <%= link_to 'Add Field', new_post_field_path(post_definition_id: @post.id, post: @post.name), { class: 'btn btn-secondary', style: 'margin-bottom: 30px; margin-top: 15px'} %>
-    <div class="card" style="border: none;">
-      <ul class="list-group list-group-flush">
-        <% @post.post_fields.each do |field| %>
-            <li class="list-group-item col-md-12">
-
-              <div class="col-md-3">
-                <span>Name: <%= field.name %></span>
-              </div>
-              <div class="col-md-3">
-                <span>Type: <%= type_formatter(field.field_type) %></span>
-              </div>
-              <div class="col-md-3">
-                <span>Required: <%= field.required %></span>
-              </div>
-
-              <div class="col-md-3" style="display: inline-block;">
-                <%= link_to "Edit", edit_post_field_path(field, { post: @post.name }),
-                            class: 'btn btn-secondary btn-sm'%>
-                <%= link_to "Delete", post_field_path(field),
-                            method: :delete,
-                            data: { confirm: 'Are you sure?' },
-                            class: 'btn btn-secondary btn-sm'%>
-              </div>
-            </li>
-        <% end %>
-      </ul>
+    <div class="content table-responsive table-full-width">
+        <table class="table table-hover">
+          <thead>
+            <th>Name</th>
+      	    <th>Type</th>
+          	<th>Required</th>
+          	<th></th>
+          </thead>
+          <tbody>
+              <% @post.post_fields.each do |field| %>
+                <tr>
+                  <td><%= field.name %></td>
+                  <td><%= type_formatter(field.field_type) %></td>
+                  <td><%= field.required %></td>
+                  <td style="text-align: right;">
+                    <% if field != @post.post_fields.all.first %>
+                      <%= link_to "Edit", edit_post_field_path(field, { post: @post.name }),
+                              class: 'btn btn-secondary btn-sm'%>
+                      <%= link_to "Delete", post_field_path(field),
+                              method: :delete,
+                              data: { confirm: 'Are you sure?' },
+                              class: 'btn btn-secondary btn-sm'%>
+                    <% end %></td>
+                </tr>
+              <% end %>
+            </tbody>
+        </table>
     </div>
-  </div>
 </div>

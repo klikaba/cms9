@@ -16,7 +16,15 @@ module Cms9
       @post = PostDefinition.new(post_definition_params)
 
       if @post.save
-        redirect_to post_definitions_path
+        @field = PostField.new({
+          'name': 'Title',
+          'field_type': 'text',
+          'required': true,
+          'post_definition_id': @post.id
+        })
+        if @field.save
+          redirect_to post_definitions_path
+        end
       else
         render 'new'
       end

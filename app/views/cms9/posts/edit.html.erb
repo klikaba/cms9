@@ -1,5 +1,7 @@
-<h3>Update for
-  <%= Cms9::PostDefinition.find(@post.post_definition_id).name %>
-</h3>
+<div class="container-fluid">
+  <h3>Update for
+    <%= Cms9::PostDefinition.find(@post.post_definition_id).name %>
+  </h3>
 
-<%= render 'post_form' %>
+  <%= render 'post_form' %>
+</div>

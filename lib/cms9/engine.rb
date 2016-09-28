@@ -7,7 +7,8 @@ module Cms9
     require 'coffee-rails'
     require 'jquery-rails'
     require 'jbuilder'
-    require 'bootstrap'
+    require 'bootstrap-sass'
+    require 'rails-assets-tether'
     require 'wysiwyg-rails'
 
     initializer :append_migrations do |app|

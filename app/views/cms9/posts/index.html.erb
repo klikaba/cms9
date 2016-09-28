@@ -1,15 +1,44 @@
-<h3>List Posts</h3>
+<div class="dropdown" style="float: right;">
+      <a href="#" class="dropdown-toggle btn btn-info btn-fill" data-toggle="dropdown">
+        <span>Create New</span>
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
+      </a>
+      <ul class="dropdown-menu" style="margin-left: -30px;">
+        <% Cms9::PostDefinition.all.each do |post| %>
+          <li>
+            <%= link_to post.name, new_post_path(type: post.name, post_definition_id: post.id) %>
+          </li>
+        <% end %>
+      </ul>
+</div>
 
-<% @posts.each do |post| %>
-    <div style="margin-top: 10px; margin-bottom: 10px; border-bottom: 1px solid #d0d5d8; padding: 10px 0 10px 0;">
-      <span><%= post.post_definition.name %></span>
-      <div style="display: inline-block; float: right; margin-right: 60%;">
-        <%= link_to "Edit", edit_post_path(post),
-                      class: 'btn btn-secondary btn-sm'%>
-        <%= link_to "Delete", post_path(post),
-                      method: :delete,
-                      data: { confirm: 'Are you sure?' },
-                      class: 'btn btn-secondary btn-sm'%>
-      </div>
-    </div>
-<% end %>
+<div class="container-fluid">
+  <h3>List Posts</h3>
+
+  <div class="content table-responsive table-full-width">
+      <table class="table table-hover">
+        <thead>
+          <th>Type</th>
+          <th>Created at</th>
+          <th></th>
+        </thead>
+        <tbody>
+            <% @posts.each do |post| %>
+              <tr>
+                <td><%= post.post_definition.name %></td>
+                <td><%= post.post_definition.created_at %></td>
+                <td style="text-align: right;">
+                  <%= link_to "Edit", edit_post_path(post),
+                                class: 'btn btn-secondary btn-sm'%>
+                  <%= link_to "Delete", post_path(post),
+                                method: :delete,
+                                data: { confirm: 'Are you sure?' },
+                                class: 'btn btn-secondary btn-sm'%>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+      </table>
+  </div>
+
+</div>
