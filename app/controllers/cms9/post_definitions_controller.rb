@@ -41,8 +41,11 @@ module Cms9
     end
 
     def destroy
-      @post = PostDefinition.find(params[:id])
-      @post.destroy
+      @post_def = PostDefinition.find(params[:id])
+      @post_def.destroy
+
+      @posts = Post.where(post_definition_id: params[:id])
+      @posts.destroy_all
 
       redirect_to post_definitions_path
     end
