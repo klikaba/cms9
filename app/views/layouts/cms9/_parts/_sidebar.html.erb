@@ -12,13 +12,13 @@
                    <p>Home</p>
                  <% end %>
              </li>
-             <li class="<%= 'active' if params[:controller] == 'cms9/post_definitions' %>">
+             <li class="<%= 'active' if params[:controller] == 'cms9/post_definitions' || params[:controller] == 'cms9/post_fields' %>">
                  <%= link_to post_definitions_path do %>
                    <i class="fa fa-folder-open" aria-hidden="true"></i>
                    <p>Post Definitions</p>
                  <% end %>
              </li>
-             <li class="<%= 'active' if params[:controller] == 'cms9/posts' && params[:action] == 'index' %>">
+             <li class="<%= 'active' if params[:controller] == 'cms9/posts' %>">
                  <%= link_to posts_path do %>
                    <i class="fa fa-file" aria-hidden="true"></i>
                    <p>Posts</p>
