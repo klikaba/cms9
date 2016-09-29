@@ -1,5 +1,5 @@
 module Cms9
-  class PostsController < ApplicationController
+  class PostsController < Cms9::ApplicationController
     def index
       @posts = Post.all
     end

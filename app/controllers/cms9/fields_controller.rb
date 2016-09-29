@@ -1,4 +1,4 @@
 module Cms9
-  class FieldsController < ApplicationController
+  class FieldsController < Cms9::ApplicationController
   end
 end

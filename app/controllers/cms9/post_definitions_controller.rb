@@ -1,5 +1,5 @@
 module Cms9
-  class PostDefinitionsController < ApplicationController
+  class PostDefinitionsController < Cms9::ApplicationController
     def index
       @posts = PostDefinition.all
     end

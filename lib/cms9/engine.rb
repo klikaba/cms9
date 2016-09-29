@@ -6,6 +6,7 @@ require 'jbuilder'
 require 'bootstrap-sass'
 require 'rails-assets-tether'
 require 'wysiwyg-rails'
+require 'pry'
 
 module Cms9
   class Engine < ::Rails::Engine

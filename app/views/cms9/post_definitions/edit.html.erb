@@ -46,7 +46,8 @@
                 <tr>
                   <td><%= field.name %></td>
                   <td><%= type_formatter(field.field_type) %></td>
-                  <td class="required-field-icons"><% if field.required %>
+                  <td class="required-field-icons">
+                      <% if field.required %>
                         <i class="fa fa-check" aria-hidden="true"></i>
                       <% else %>
                         <i class="fa fa-times" aria-hidden="true"></i>

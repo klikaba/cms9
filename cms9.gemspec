@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails-assets-tether", ">= 1.1.0"
   s.add_dependency "wysiwyg-rails"
 
+  s.add_development_dependency "pry"
   s.add_development_dependency "web-console"
   s.add_development_dependency "listen", "~> 3.0.5"
   s.add_development_dependency "spring"
