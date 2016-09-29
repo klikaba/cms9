@@ -11,7 +11,7 @@ module Cms9
 
     def authorize
       unless current_user.cms9_admin?
-        raise 'Exception'
+        raise 'Missing cms9_admin? implementation in current_user'
       end
     end
   end
