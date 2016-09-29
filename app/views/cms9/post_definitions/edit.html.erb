@@ -46,7 +46,12 @@
                 <tr>
                   <td><%= field.name %></td>
                   <td><%= type_formatter(field.field_type) %></td>
-                  <td><%= field.required %></td>
+                  <td class="required-field-icons"><% if field.required %>
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                      <% else %>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                      <% end %>
+                  </td>
                   <td style="text-align: right;">
                     <% if field != @post.post_fields.all.first %>
                       <%= link_to "Edit", edit_post_field_path(field, { post: @post.name }),
