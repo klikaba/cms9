@@ -1,5 +1,5 @@
 module Cms9
-  class WelcomeController < ApplicationController
+  class WelcomeController < Cms9::ApplicationController
     def index
     end
   end

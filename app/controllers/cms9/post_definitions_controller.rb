@@ -1,5 +1,5 @@
 module Cms9
-  class PostDefinitionsController < ApplicationController
+  class PostDefinitionsController < Cms9::ApplicationController
     def index
       @posts = PostDefinition.all
     end
@@ -16,7 +16,15 @@ module Cms9
       @post = PostDefinition.new(post_definition_params)
 
       if @post.save
-        redirect_to post_definitions_path
+        @field = PostField.new({
+          'name': 'Title',
+          'field_type': 'text',
+          'required': true,
+          'post_definition_id': @post.id
+        })
+        if @field.save
+          redirect_to post_definitions_path
+        end
       else
         render 'new'
       end
@@ -33,8 +41,11 @@ module Cms9
     end
 
     def destroy
-      @post = PostDefinition.find(params[:id])
-      @post.destroy
+      @post_def = PostDefinition.find(params[:id])
+      @post_def.destroy
+
+      @posts = Post.where(post_definition_id: params[:id])
+      @posts.destroy_all
 
       redirect_to post_definitions_path
     end

@@ -1,4 +1,9 @@
-<h1>Administration #index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div class="container-fluid">
+  <h1>Administration #index</h1>
+  <p>Find me in app/views/welcome/index.html.erb</p>
 
-<%= link_to 'Post Definitions', controller: 'post_definitions' %>
+  <%= link_to 'Post Definitions', controller: 'post_definitions' %>
+  <%= "current_user" %>
+
+  <%= current_user %>
+</div>

@@ -1,0 +1,9 @@
+<%= field.label field.object.post_field.name %>
+
+<% if field.object.image_url %>
+  <%= field.file_field :image, onchange: "loadFile(event)" %>
+  <%= image_tag(field.object.image_url, class: 'post-image loaded', id: 'post-image') %>
+<% else %>
+  <%= field.file_field :image, onchange: "loadFile(event)" %>
+  <img id="post-image" class="post-image"/>
+<% end %>

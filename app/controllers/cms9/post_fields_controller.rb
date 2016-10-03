@@ -1,5 +1,5 @@
 module Cms9
-  class PostFieldsController < ApplicationController
+  class PostFieldsController < Cms9::ApplicationController
     def new
       @post = PostField.new
       @post.post_definition_id = params[:post_definition_id]

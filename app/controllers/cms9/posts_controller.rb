@@ -1,5 +1,5 @@
 module Cms9
-  class PostsController < ApplicationController
+  class PostsController < Cms9::ApplicationController
     def index
       @posts = Post.all
     end
@@ -42,7 +42,7 @@ module Cms9
 
     private
       def post_params
-        params.require(:post).permit(:post_definition_id, fields_attributes: [:id, :post_id, :post_field_id, :value])
+        params.require(:post).permit(:post_definition_id, fields_attributes: [:id, :post_id, :post_field_id, :value, :image])
       end
 
   end

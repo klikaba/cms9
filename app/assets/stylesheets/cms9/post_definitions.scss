@@ -1,0 +1,22 @@
+.required-field-icons {
+  .fa-check {
+    color: green;
+  }
+  .fa-times {
+    color: red;
+  }
+}
+
+.post-image {
+  display: block;
+  border-radius: 3px;
+  width: 220px;
+  margin-top: 10px;
+  &.loaded {
+    border: 1px solid #ccc;
+  }
+}
+
+.remove-picture-block {
+  color: red;
+}

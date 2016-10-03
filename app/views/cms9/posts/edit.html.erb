@@ -1,5 +1,9 @@
-<h3>Update for
-  <%= Cms9::PostDefinition.find(@post.post_definition_id).name %>
-</h3>
+<%= link_to 'Back', posts_path, { class: 'btn btn-info btn-fill', style: 'float: right;'} %>
 
-<%= render 'post_form' %>
+<div class="container-fluid">
+  <h3>Update for
+    <%= Cms9::PostDefinition.find(@post.post_definition_id).name %>
+  </h3>
+
+  <%= render 'post_form' %>
+</div>
