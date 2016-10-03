@@ -1,30 +1,35 @@
 <div class="sidebar" data-background-color="white" data-active-color="danger">
 
    <div class="sidebar-wrapper">
-         <div class="logo">
-             <%= link_to 'CMS9', root_path, class: "simple-text" %>
-         </div>
+       <div class="logo">
+           <%= link_to 'CMS9', root_path, class: "simple-text" %>
+       </div>
 
-         <ul class="nav">
-             <li class="<%= 'active' if params[:controller] == 'cms9/welcome' %>">
-                 <%= link_to root_path do %>
-                   <i class="fa fa-home" aria-hidden="true"></i>
-                   <p>Home</p>
-                 <% end %>
-             </li>
-             <li class="<%= 'active' if params[:controller] == 'cms9/post_definitions' || params[:controller] == 'cms9/post_fields' %>">
-                 <%= link_to post_definitions_path do %>
-                   <i class="fa fa-folder-open" aria-hidden="true"></i>
-                   <p>Post Definitions</p>
-                 <% end %>
-             </li>
-             <li class="<%= 'active' if params[:controller] == 'cms9/posts' %>">
-                 <%= link_to posts_path do %>
-                   <i class="fa fa-file" aria-hidden="true"></i>
-                   <p>Posts</p>
-                 <% end %>
-             </li>
+       <ul class="nav">
+           <li class="<%= 'active' if params[:controller] == 'cms9/welcome' %>">
+               <%= link_to root_path do %>
+                 <i class="fa fa-home" aria-hidden="true"></i>
+                 <p>Home</p>
+               <% end %>
+           </li>
+           <li class="<%= 'active' if params[:controller] == 'cms9/post_definitions' || params[:controller] == 'cms9/post_fields' %>">
+               <%= link_to post_definitions_path do %>
+                 <i class="fa fa-folder-open" aria-hidden="true"></i>
+                 <p>Post Definitions</p>
+               <% end %>
+           </li>
+           <li class="<%= 'active' if params[:controller] == 'cms9/posts' %>">
+               <%= link_to posts_path do %>
+                 <i class="fa fa-file" aria-hidden="true"></i>
+                 <p>Posts</p>
+               <% end %>
+           </li>
 
-         </ul>
+       </ul>
+       <div class="container-fluid" style="position: absolute; bottom: 5px; padding-left: 35%;">
+           <div class="copyright">
+               Cms9, <script>document.write(new Date().getFullYear())</script>
+           </div>
+       </div>
    </div>
  </div>
