@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922081450) do
+ActiveRecord::Schema.define(version: 20160930091941) do
 
   create_table "cms9_fields", force: :cascade do |t|
     t.integer  "post_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20160922081450) do
     t.string   "value"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.text     "image_data"
     t.index ["post_field_id"], name: "index_cms9_fields_on_post_field_id"
     t.index ["post_id"], name: "index_cms9_fields_on_post_id"
   end

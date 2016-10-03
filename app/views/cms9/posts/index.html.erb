@@ -26,7 +26,7 @@
             <% @posts.each do |post| %>
               <tr>
                 <td><%= post.post_definition.name %></td>
-                <td><%= post.post_definition.created_at %></td>
+                <td><%= post.created_at %></td>
                 <td style="text-align: right;">
                   <%= link_to "Edit", edit_post_path(post),
                                 class: 'btn btn-secondary btn-sm'%>
