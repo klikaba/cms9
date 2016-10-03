@@ -1,9 +1,20 @@
-<%= field.label field.object.post_field.name %>
+<%= field.label field.object.post_field.name, { style: 'margin-top: 20px;'} %>
 
 <% if field.object.image_url %>
-  <%= field.file_field :image, onchange: "loadFile(event)" %>
-  <%= image_tag(field.object.image_url, class: 'post-image loaded', id: 'post-image') %>
+  <%= link_to "Remove", '#', {
+    style: 'display: inline-block;',
+    onclick: "deleteFile('edit', '#{field.object.id}', '#{field.object.post_id}');",
+    id: 'remove-image' } %>
+  <%= field.file_field :image, {
+    onchange: "loadFile(event)",
+    id: 'upload-image-field' } %>
+  <%= image_tag field.object.image_url(:thumb), {
+    class: 'post-image loaded',
+      id: 'post-image' } %>
 <% else %>
-  <%= field.file_field :image, onchange: "loadFile(event)" %>
+  <a href="#" onclick="deleteFile('new')" id="remove-image" style="display: none;">Remove</a>
+  <%= field.file_field :image, {
+    onchange: "loadFile(event)",
+    id: 'upload-image-field' } %>
   <img id="post-image" class="post-image"/>
 <% end %>
