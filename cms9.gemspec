@@ -26,6 +26,9 @@ Gem::Specification.new do |s|
   s.add_dependency "bootstrap-sass", "~> 3.3.7"
   s.add_dependency "rails-assets-tether", ">= 1.1.0"
   s.add_dependency "wysiwyg-rails"
+  s.add_dependency "fastimage"
+  s.add_dependency "image_processing"
+  s.add_dependency "mini_magick"
   s.add_dependency "shrine"
 
   s.add_development_dependency "pry"
