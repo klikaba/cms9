@@ -5,8 +5,9 @@ require 'jquery-rails'
 require 'jbuilder'
 require 'bootstrap-sass'
 require 'rails-assets-tether'
-require 'wysiwyg-rails'
+require 'font-awesome-rails'
 require 'pry'
+require 'ckeditor'
 
 module Cms9
   class Engine < ::Rails::Engine

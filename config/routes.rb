@@ -5,5 +5,6 @@ Cms9::Engine.routes.draw do
     resources :fields
   end
 
+  mount Ckeditor::Engine => '/ckeditor'
   root 'welcome#index'
 end

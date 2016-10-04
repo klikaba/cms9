@@ -3,11 +3,15 @@
 <% if field.object.image_url %>
   <%= link_to "Remove", '#', {
     style: 'display: inline-block;',
-    onclick: "deleteFile('edit', '#{field.object.id}', '#{field.object.post_id}');",
+    onclick: "deleteFile('edit');",
     id: 'remove-image' } %>
+  <%= field.hidden_field :remove_image, { id: 'remove-value' } %>
+
   <%= field.file_field :image, {
     onchange: "loadFile(event)",
     id: 'upload-image-field' } %>
+  <%= field.hidden_field :image_cache %>
+
   <%= image_tag field.object.image_url(:thumb), {
     class: 'post-image loaded',
       id: 'post-image' } %>
@@ -16,5 +20,6 @@
   <%= field.file_field :image, {
     onchange: "loadFile(event)",
     id: 'upload-image-field' } %>
+  <%= field.hidden_field :image_cache %>
   <img id="post-image" class="post-image"/>
 <% end %>
