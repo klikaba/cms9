@@ -15,4 +15,13 @@
 //= require tether
 //= require bootstrap-sprockets
 //= require froala_editor.min.js
+//= require plugins/fullscreen.min.js
+//= require plugins/image.min.js
+//= require plugins/image_manager.min.js
+//= require plugins/code_beautifier.min.js
+//= require plugins/code_view.min.js
+//= require plugins/colors.min.js
+//= require plugins/table.min.js
+//= require plugins/file.min.js
+//= require plugins/url.min.js
 //= require_tree .
