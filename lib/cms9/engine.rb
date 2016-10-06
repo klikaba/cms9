@@ -6,8 +6,8 @@ require 'jbuilder'
 require 'bootstrap-sass'
 require 'rails-assets-tether'
 require 'font-awesome-rails'
-require 'pry'
 require 'ckeditor'
+require 'pry'
 
 module Cms9
   class Engine < ::Rails::Engine

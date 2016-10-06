@@ -15,6 +15,6 @@ CKEDITOR.editorConfig = function(config) {
   config.filebrowserImageUploadUrl = "/cms9/ckeditor/pictures";
   // The location of a script that handles file uploads.
   config.filebrowserUploadUrl = "/cms9/ckeditor/attachment_files";
-  
+
   return true;
 };

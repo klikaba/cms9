@@ -10,19 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005095051) do
+ActiveRecord::Schema.define(version: 20161006165124) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
-    t.string   "data_file_name",               null: false
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
+    t.string   "data_uid",                  null: false
+    t.string   "data_name",                 null: false
+    t.string   "data_mime_type"
+    t.integer  "data_size"
     t.integer  "assetable_id"
-    t.string   "assetable_type",    limit: 30
-    t.string   "type",              limit: 30
-    t.integer  "width"
-    t.integer  "height"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "assetable_type", limit: 30
+    t.string   "type",           limit: 30
+    t.integer  "data_width"
+    t.integer  "data_height"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable"
     t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type"
   end
@@ -31,9 +32,12 @@ ActiveRecord::Schema.define(version: 20161005095051) do
     t.integer  "post_id"
     t.integer  "post_field_id"
     t.string   "value"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.text     "image"
+    t.string   "image_uid"
+    t.string   "image_name"
+    t.string   "image_custom_size"
   end
 
   create_table "cms9_post_definitions", force: :cascade do |t|

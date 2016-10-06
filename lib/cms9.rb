@@ -1,5 +1,5 @@
 require "cms9/engine"
-require 'carrierwave'
+require "dragonfly"
 
 module Cms9
   class << self

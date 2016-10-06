@@ -43,7 +43,8 @@ module Cms9
     private
       def post_params
         params.require(:post).permit(:post_definition_id, fields_attributes:
-                                    [:id, :post_id, :post_field_id, :value, :image, :remove_image, :image_cache])
+                                    [:id, :post_id, :post_field_id, :value,
+                                     :image, :image_uid, :image_name, :remove_image, :image_custom_size])
       end
 
   end

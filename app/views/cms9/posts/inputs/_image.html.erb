@@ -1,25 +1,22 @@
 <%= field.label field.object.post_field.name, { style: 'margin-top: 20px;'} %>
 
-<% if field.object.image_url %>
+<% if field.object.image_stored? %>
   <%= link_to "Remove", '#', {
-    style: 'display: inline-block;',
-    onclick: "deleteFile('edit');",
-    id: 'remove-image' } %>
+      style: 'display: inline-block;',
+      onclick: "deleteFile('edit');",
+      id: 'remove-image' } %>
   <%= field.hidden_field :remove_image, { id: 'remove-value' } %>
-
   <%= field.file_field :image, {
-    onchange: "loadFile(event)",
     id: 'upload-image-field' } %>
-  <%= field.hidden_field :image_cache %>
-
-  <%= image_tag field.object.image_url(:thumb), {
-    class: 'post-image loaded',
-      id: 'post-image' } %>
+  <%= image_tag field.object.image.thumb('250x').url, {
+      class: 'post-image loaded',
+        id: 'post-image' } %>
 <% else %>
   <a href="#" onclick="deleteFile('new')" id="remove-image" style="display: none;">Remove</a>
   <%= field.file_field :image, {
-    onchange: "loadFile(event)",
     id: 'upload-image-field' } %>
-  <%= field.hidden_field :image_cache %>
   <img id="post-image" class="post-image"/>
 <% end %>
+
+<label>Image size (e.g 300x200, 400x, 300x300#)</label>
+<%= field.text_field :image_custom_size, { class: 'form-control', id: 'size_input', style: 'margin-bottom: 30px;' }%>
