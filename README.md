@@ -39,7 +39,7 @@ $ rails generate cms9:install [DEF_ROUTE]
 ```
 Where [DEF_ROUTE] is optional and presents where your Cms9 route will be mounted, by default it's /cms9
 
-Note: If your Cms9 is not mounted on /cms9 route, you should update 'app/assets/javascripts/ckeditor/config.js' with proper route.
+**Note**: If your Cms9 is not mounted on /cms9 route, you should update 'app/assets/javascripts/ckeditor/config.js' with proper route.
 
 For example if our route is mounted as 'cms9_admin':
 
