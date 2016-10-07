@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cms9 (0.1.16)
+    cms9 (0.1.1)
       bootstrap-sass (~> 3.3.7)
       ckeditor
       coffee-rails (~> 4.2)

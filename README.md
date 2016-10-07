@@ -37,7 +37,21 @@ Re-bundle, then run the installer:
 ```bash
 $ rails generate cms9:install [DEF_ROUTE]
 ```
-Where [DEF_ROUTE] presents where your Cms9 will be mounted, by default it's /cms9
+Where [DEF_ROUTE] is optional and presents where your Cms9 route will be mounted, by default it's /cms9
+
+Note: If your Cms9 is not mounted on /cms9 route, you should update 'app/assets/javascripts/ckeditor/config.js' with proper route.
+
+For example if our route is mounted as 'cms9_admin':
+
+```javascript
+CKEDITOR.editorConfig = function(config) {
+
+  config.filebrowserBrowseUrl = "/cms9_admin/ckeditor/attachment_files";
+  ...
+
+  return true;
+};
+```
 
 Next, check the MODEL for any additional configuration options you might want to add, such as confirmable or lockable. If you add an option, be sure to inspect the migration file
 
@@ -48,7 +62,7 @@ $ rails db:migrate
 ```
 
 Restart your server, and visit http://localhost:3000/cms9
-to see your new cms9 dashboard in action.
+to see your new Cms9 dashboard in action.
 
 ## Configuration
 
@@ -65,6 +79,7 @@ Cms9.configure do |config|
   config.current_user =  :current_user
 end
 ```
+
 
 
 ## License
