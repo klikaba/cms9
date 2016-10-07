@@ -1,7 +1,16 @@
-<%= link_to 'Back', edit_post_definition_path(@post.post_definition_id), { class: 'btn btn-info btn-fill', style: 'float: right;'} %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-info">
+      <div class="box-header">
+        <h3 class="box-title">
+          Update Field for <%= @post.post_definition.name %>
+        </h3>
+      </div>
+      <div class="box-body">
+        <%= render 'field_form', edit: true %>
+      </div>
+    </div>
+  </div>
+</div>  
 
-<div class="container-fluid">
-  <h3>Update Field for <%= @post.post_definition.name %></h3>
 
-  <%= render 'field_form', edit: true %>
-</div>

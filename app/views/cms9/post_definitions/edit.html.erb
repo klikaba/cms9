@@ -1,70 +1,78 @@
-<%= link_to 'Back', post_definitions_path, { class: 'btn btn-info btn-fill', style: 'float: right;'} %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-info">
+      <div class="box-header">
+        <h3 class="box-title">
+          Add Field Definition
+        </h3>
+      </div>
+      <div class="box-body">
+        <h3><%= @post.name %></h3>
+        <%= form_for @post do |f| %>
+          <% if @post.errors.any? %>
+            <div id="error_explanation">
+              <h2>
+                <%= pluralize(@post.errors.count, "error") %> prohibited
+                this article from being saved:
+              </h2>
+              <ul>
+                <% @post.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
-<div class="container-fluid" style="margin-bottom: 30px;">
-  <h3><%= @post.name %></h3>
-  <%= form_for @post do |f| %>
-
-      <% if @post.errors.any? %>
-          <div id="error_explanation">
-            <h2>
-              <%= pluralize(@post.errors.count, "error") %> prohibited
-              this article from being saved:
-            </h2>
-            <ul>
-              <% @post.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-              <% end %>
-            </ul>
+          <div class="col-md-9" style="padding: 0;">
+            <%= f.label :name %><br>
+            <%= f.text_field :name, class: "form-control"%>
           </div>
-      <% end %>
 
-      <div class="col-md-9" style="padding: 0;">
-        <%= f.label :name %><br>
-        <%= f.text_field :name, class: "form-control"%>
-      </div>
+          <div class="col-md-3" style="padding: 0;">
+            <%= f.submit class: 'btn btn-primary', style: 'margin-top: 28px; margin-left: 15px;'%>
+          </div>
+        <% end %>
 
-      <div class="col-md-3" style="padding: 0;">
-        <%= f.submit class: 'btn btn-secondary', style: 'margin-top: 28px; margin-left: 15px;'%>
-      </div>
+        <hr/>
+        <!-- ///////////// -->
 
-  <% end %>
-</div>
-
-<div class="container-fluid" style="margin-top: 10px; border-top: 1px solid rgba(102, 97, 91, 0.3);">
-    <h4>Fields</h4>
-    <%= link_to 'Add Field', new_post_field_path(post_definition_id: @post.id, post: @post.name), { class: 'btn btn-secondary', style: 'margin-bottom: 30px; margin-top: 15px'} %>
-    <div class="content table-responsive table-full-width">
-        <table class="table table-hover">
+        <h4>Fields</h4>
+        <%= link_to 'Add Field', new_post_field_path(post_definition_id: @post.id, post: @post.name), { class: 'btn btn-primary', style: 'margin-bottom: 30px; margin-top: 15px'} %>
+        <table class="table">
           <thead>
             <th>Name</th>
-      	    <th>Type</th>
-          	<th>Required</th>
-          	<th></th>
+            <th>Type</th>
+            <th>Required</th>
+            <th></th>
           </thead>
           <tbody>
-              <% @post.post_fields.each do |field| %>
-                <tr>
-                  <td><%= field.name %></td>
-                  <td><%= type_formatter(field.field_type) %></td>
-                  <td class="required-field-icons">
-                      <% if field.required %>
-                        <i class="fa fa-check" aria-hidden="true"></i>
-                      <% else %>
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                      <% end %>
-                  </td>
-                  <td style="text-align: right;">
-                    <% if field != @post.post_fields.all.first %>
-                      <%= link_to "Edit", edit_post_field_path(field, { post: @post.name }),
-                              class: 'btn btn-secondary btn-sm'%>
-                      <%= link_to "Delete", post_field_path(field),
-                              method: :delete,
-                              data: { confirm: 'Are you sure?' },
-                              class: 'btn btn-secondary btn-sm'%>
-                    <% end %></td>
-                </tr>
-              <% end %>
-            </tbody>
+            <% @post.post_fields.each do |field| %>
+              <tr>
+                <td><%= field.name %></td>
+                <td><%= type_formatter(field.field_type) %></td>
+                <td class="required-field-icons">
+                    <% if field.required %>
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                    <% else %>
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    <% end %>
+                </td>
+                <td style="text-align: right;">
+                  <% if field != @post.post_fields.all.first %>
+                    <%= link_to "Edit", edit_post_field_path(field, { post: @post.name }),
+                            class: 'btn btn-primary btn-sm'%>
+                    <%= link_to "Delete", post_field_path(field),
+                            method: :delete,
+                            data: { confirm: 'Are you sure?' },
+                            class: 'btn btn-danger btn-sm'%>
+                  <% end %></td>
+              </tr>
+            <% end %>
+          </tbody>
         </table>
+
+      </div>
     </div>
-</div>
+  </div>
+</div>  
+

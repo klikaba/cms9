@@ -1,7 +1,7 @@
 module Cms9
   class PostDefinitionsController < Cms9::ApplicationController
     def index
-      @posts = PostDefinition.all
+      @posts = PostDefinition.order('created_at desc').page(params[:page]).per(20)
     end
 
     def new

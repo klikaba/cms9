@@ -1,44 +1,49 @@
-<div class="dropdown" style="float: right;">
-      <a href="#" class="dropdown-toggle btn btn-info btn-fill" data-toggle="dropdown">
-        <span>Create New</span>
-        <i class="fa fa-caret-down" aria-hidden="true"></i>
-      </a>
-      <ul class="dropdown-menu" style="margin-left: -30px;">
-        <% Cms9::PostDefinition.all.each do |post| %>
-          <li>
-            <%= link_to post.name, new_post_path(type: post.name, post_definition_id: post.id) %>
-          </li>
-        <% end %>
-      </ul>
-</div>
 
-<div class="container-fluid">
-  <h3>List Posts</h3>
-
-  <div class="content table-responsive table-full-width">
-      <table class="table table-hover">
-        <thead>
-          <th>Type</th>
-          <th>Created at</th>
-          <th></th>
-        </thead>
-        <tbody>
-            <% @posts.each do |post| %>
-              <tr>
-                <td><%= post.post_definition.name %></td>
-                <td><%= post.created_at %></td>
-                <td style="text-align: right;">
-                  <%= link_to "Edit", edit_post_path(post),
-                                class: 'btn btn-secondary btn-sm'%>
-                  <%= link_to "Delete", post_path(post),
-                                method: :delete,
-                                data: { confirm: 'Are you sure?' },
-                                class: 'btn btn-secondary btn-sm'%>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-      </table>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-info">
+      <div class="box-header">
+        <h3 class="box-title pull-right">
+          <div class="dropdown"">
+            <a href="#" class="dropdown-toggle btn btn-primary btn-fill" data-toggle="dropdown">
+              <span>Create New</span>
+              <i class="fa fa-caret-down" aria-hidden="true"></i>
+            </a>
+            <ul class="dropdown-menu" style="margin-left: -30px;">
+              <% Cms9::PostDefinition.all.each do |post| %>
+                <li>
+                  <%= link_to post.name, new_post_path(type: post.name, post_definition_id: post.id) %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </h3>
+      </div>
+      <div class="box-body">
+        <table class="table table-hover">
+          <thead>
+            <th>Type</th>
+            <th>Created at</th>
+            <th></th>
+          </thead>
+          <tbody>
+              <% @posts.each do |post| %>
+                <tr>
+                  <td><%= post.post_definition.name %></td>
+                  <td><%= post.created_at %></td>
+                  <td style="text-align: right;">
+                    <%= link_to "Edit", edit_post_path(post),
+                                  class: 'btn btn-primary btn-sm'%>
+                    <%= link_to "Delete", post_path(post),
+                                  method: :delete,
+                                  data: { confirm: 'Are you sure?' },
+                                  class: 'btn btn-danger btn-sm'%>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-
-</div>
+</div>  
