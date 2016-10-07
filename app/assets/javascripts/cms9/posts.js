@@ -1,55 +1,39 @@
-$(document).ready(function(){
-    $('.froala-editor').froalaEditor({
-      heightMin: 200,
-      heightMax: 250,
-      pastePlain: true,
-      toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'insertHR', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', 'undo', 'redo', 'clearFormatting', 'selectAll', 'html', 'fullscreen']
-    });
+$( document ).ready(function() {
+  $('#upload-image-field').change(function() {
+      var output = document.getElementById('post-image');
+      var removeLink = document.getElementById('remove-image');
+      var sizeInput = document.getElementById('size_input');
+
+      var fr = new FileReader();
+      fr.onload = function() {
+          var img = new Image;
+          img.onload = function() {
+            sizeInput.value = img.width + 'x' + img.height;
+          };
+          img.src = fr.result;
+      };
+      output.src = URL.createObjectURL(this.files[0]);
+      output.style.display = 'block';
+      removeLink.style.display = 'inline-block';
+
+      fr.readAsDataURL(this.files[0]);
+  });
 });
 
-function patchImage (post_id, field_id) {
+var deleteFile = function(value) {
   var inputField = document.getElementById('upload-image-field');
   var output = document.getElementById('post-image');
   var removeLink = document.getElementById('remove-image');
-
-  var request = $.ajax({
-    url: "/cms9/posts/" + post_id + "/fields/" + field_id,
-    method: "PATCH"
-  });
-
-  request.done(function( msg ) {
-    inputField.value = '';
-    output.src = '#';
-    output.style.display = 'none';
-    removeLink.style.display = 'none';
-  });
-
-  request.fail(function( jqXHR, textStatus ) {
-    console.log(textStatus);
-  });
-}
-
-var loadFile = function(event) {
-  var output = document.getElementById('post-image');
-  var removeLink = document.getElementById('remove-image');
-  if(event.target.files[0]) {
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.style.display = 'block';
-    removeLink.style.display = 'inline-block';
-  }
-};
-
-var deleteFile = function(value, field_id, post_id, image) {
-  var inputField = document.getElementById('upload-image-field');
-  var output = document.getElementById('post-image');
-  var removeLink = document.getElementById('remove-image');
+  var rmValue = document.getElementById('remove-value');
+  var sizeInput = document.getElementById('size_input');
 
   if(value === 'edit' && output.style.display !== 'none') {
-    patchImage(post_id, field_id);
-  } else {
-    inputField.value = '';
-    output.src = '#';
-    output.style.display = 'none';
-    removeLink.style.display = 'none';
+    rmValue.value = true;
   }
+
+  sizeInput.value = '';
+  inputField.value = '';
+  output.src = '#';
+  output.style.display = 'none';
+  removeLink.style.display = 'none';
 };

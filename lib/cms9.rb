@@ -1,4 +1,5 @@
 require "cms9/engine"
+require "dragonfly"
 
 module Cms9
   class << self

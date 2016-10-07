@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name        = "cms9"
   s.version     = Cms9::VERSION
   s.authors     = ["SamirHodzic"]
-  s.email       = ["samir.sgd@gmail.com"]
+  s.email       = ["samir.hodzic@klika.ba"]
   s.homepage    = "http://www.klika.ba"
   s.summary     = "Cms9"
   s.description = "Small CMS Admin module for Rails"
@@ -25,11 +25,10 @@ Gem::Specification.new do |s|
   s.add_dependency "jbuilder", "~> 2.5"
   s.add_dependency "bootstrap-sass", "~> 3.3.7"
   s.add_dependency "rails-assets-tether", ">= 1.1.0"
-  s.add_dependency "wysiwyg-rails"
-  s.add_dependency "fastimage"
-  s.add_dependency "image_processing"
+  s.add_dependency "font-awesome-rails"
+  s.add_dependency "dragonfly", "~> 1.0.12"
   s.add_dependency "mini_magick"
-  s.add_dependency "shrine"
+  s.add_dependency "ckeditor"
 
   s.add_development_dependency "pry"
   s.add_development_dependency "web-console"

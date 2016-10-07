@@ -5,7 +5,8 @@ require 'jquery-rails'
 require 'jbuilder'
 require 'bootstrap-sass'
 require 'rails-assets-tether'
-require 'wysiwyg-rails'
+require 'font-awesome-rails'
+require 'ckeditor'
 require 'pry'
 
 module Cms9

@@ -15,6 +15,10 @@ module Cms9
         copy_file 'cms9_configurator.rb', 'config/initializers/cms9_configurator.rb'
       end
 
+      def copy_ckeditor_config
+        copy_file 'ckeditor_config.js', 'app/assets/javascripts/ckeditor/config.js'
+      end
+
       private
         def file_name
           def_route.underscore

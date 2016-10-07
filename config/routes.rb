@@ -1,4 +1,5 @@
 Cms9::Engine.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   resources :post_definitions
   resources :post_fields
   resources :posts do

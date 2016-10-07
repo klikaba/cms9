@@ -3,7 +3,7 @@ module Cms9
     protect_from_forgery with: :exception
     helper_method :current_user
 
-    before_filter :authorize
+    before_action :authorize
 
     def current_user
       current_user_ident = Cms9.configuration.current_user || :current_user

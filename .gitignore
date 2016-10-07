@@ -43,3 +43,6 @@ bower.json
 /.idea/
 /test/dummy/log
 /test/dummy/tmp
+/test/dummy/public/system
+
+**/.DS_Store
