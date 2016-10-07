@@ -13,7 +13,7 @@ field types and posts related to it.
 
 Cms9 provides a better user experience and it easy for developers to customize.
 
-## Features
+### Features
 * Custom actions
 * Automatic form validation
 * Authentication customizable (via [Devise](https://github.com/plataformatec/devise) or other)
