@@ -20,6 +20,8 @@ Cms9 provides a better user experience and it easy for developers to customize.
 * Supported ORM ActiveRecord
 * [Dragonfly](https://github.com/markevans/dragonfly) for handling images and other attachments
 * [Ckeditor](https://github.com/galetahub/ckeditor) as default WYSIWYG text editor
+* Bootstrap 3+ with PaperDashboard template
+  * Can be used or extended for wider usage
 
 ## Getting Started
 
