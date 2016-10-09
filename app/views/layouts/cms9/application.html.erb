@@ -33,6 +33,7 @@
       <aside class="left-side sidebar-offcanvas">                
         <section class="sidebar">
           <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
             <li class="<%= 'active' if params[:controller] == 'cms9/welcome' %>">
               <%= link_to root_path do %>
                <span class="fa fa-home" aria-hidden="true"></span> Dashboard
@@ -40,14 +41,17 @@
             </li>
             <li class="<%= 'active' if params[:controller] == 'cms9/post_definitions' || params[:controller] == 'cms9/post_fields' %>">
               <%= link_to post_definitions_path do %>
-                <span class="fa fa-folder-open" aria-hidden="true"></span> Post Definitions
+                <span class="fa fa-folder-open" aria-hidden="true"></span> Post Types
               <% end %>
             </li>
-            <li class="<%= 'active' if params[:controller] == 'cms9/posts' %>">
-              <%= link_to posts_path do %>
-                <i class="fa fa-file" aria-hidden="true"></i> Posts
+            <li class="header">POST TYPES</li>
+            <% Cms9::PostDefinition.all.each do |post_def| %>
+              <li>
+              <%= link_to posts_path(post_definition_id: post_def.id) do %>
+                <i class="fa fa-edit" aria-hidden="true"></i> <%= post_def.name.pluralize %>
               <% end %>
-            </li>
+              </li>
+            <% end %>
           </ul>
         </section>
       </aside>
