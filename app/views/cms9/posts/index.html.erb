@@ -22,15 +22,17 @@
       <div class="box-body">
         <table class="table table-hover">
           <thead>
-            <th>Type</th>
-            <th>Created at</th>
-            <th></th>
+            <th>Name</th>
+            <th style="width:100px;">Type</th>
+            <th style="width:120px;">Created at</th>
+            <th style="width:120px;">Actions</th>
           </thead>
           <tbody>
               <% @posts.each do |post| %>
                 <tr>
+                  <td><%= post.field('Title').value %></td>
                   <td><%= post.post_definition.name %></td>
-                  <td><%= post.created_at %></td>
+                  <td><%= distance_of_time_in_words_to_now(post.created_at) %></td>
                   <td style="text-align: right;">
                     <%= link_to "Edit", edit_post_path(post),
                                   class: 'btn btn-primary btn-sm'%>
