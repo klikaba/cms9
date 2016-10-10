@@ -19,6 +19,13 @@ module Cms9
 
       def copy_ckeditor_config
         copy_file 'templates/ckeditor_config.js', 'app/assets/javascripts/ckeditor/config.js'
+
+        data = File.read("app/assets/javascripts/ckeditor/config.js")
+        filtered_data = data.gsub("cms9", file_name)
+
+        File.open("app/assets/javascripts/ckeditor/config.js", "w") do |f|
+          f.write(filtered_data)
+        end
       end
 
       def self.next_migration_number(path)
