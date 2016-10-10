@@ -1,9 +1,14 @@
-<%= link_to 'Back', posts_path, { class: 'btn btn-info btn-fill', style: 'float: right;'} %>
-
-<div class="container-fluid">
-  <h3>Create for
-    <%= params[:type] %>
-  </h3>
-
-  <%= render 'post_form' %>
-</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-info">
+      <div class="box-header">
+        <h3 class="box-title">
+          Create for <%= @post.post_definition.name %>
+        </h3>
+      </div>
+      <div class="box-body">
+        <%= render 'post_form' %>
+      </div>
+    </div>
+  </div>
+</div>  

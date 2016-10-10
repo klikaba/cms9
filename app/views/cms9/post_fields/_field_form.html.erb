@@ -8,7 +8,7 @@
       <p style="margin-top: 20px; font-weight: bold;">Multiple choices</p>
       <%= render 'select', { f: f } %>
     </div>
-    <a href="javascript:;" id="addNewValue" class="btn btn-secondary btn-sm" style="visibility: hidden;">Add New Choice</a>
+    <a href="javascript:;" id="addNewValue" class="btn btn-primary btn-sm" style="visibility: hidden;">Add New Choice</a>
 
     <div id="selector_" style="display: none;">
       <%= render 'select', { f: f } %>
@@ -20,5 +20,5 @@
       <%= f.check_box :required, {}, true %>
     </div>
     <%= f.hidden_field :post_definition_id %>
-    <%= f.submit class: 'btn btn-secondary', style: 'margin-top: 30px;' %>
+    <%= f.submit class: 'btn btn-primary', style: 'margin-top: 30px;' %>
 <% end %>

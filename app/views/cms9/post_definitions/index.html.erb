@@ -1,24 +1,48 @@
-<%= link_to 'New Post Definition', new_post_definition_path, { class: 'btn btn-info btn-fill', style: 'float: right;'}%>
-<div class="container-fluid">
-  <h3>List Post Definitions</h3>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-info">
+      <div class="box-header">
+        <i class="fa fa-folder"></i>
+        <h3 class="box-title">Post Types</h3>
+        
+        <div class="pull-right box-tools">
+          <%= link_to 'New Post Type', new_post_definition_path, class: 'btn btn-primary' %>
+        </div>
+      </div>
+      <div class="box-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th style="width:20px;">Count</th>
+              <th style="width:120px;">Created</th>
+              <th style="width:140px;">Actions</th>
+            </tr>
+          </thead>
 
-  <div class="content table-responsive table-full-width">
-      <table class="table table-hover">
-        <tbody>
+          <tbody>
             <% @posts.each do |post| %>
               <tr>
                 <td><%= post.name %></td>
-                <td style="text-align: right;">
+                <td><%= Cms9::Post.where(post_definition: post).count %></td>
+                <td><%= distance_of_time_in_words_to_now(post.created_at) %></td>
+                <td>
                   <%= link_to "Edit", edit_post_definition_path(post),
-                                class: 'btn btn-secondary btn-sm'%>
+                                class: 'btn btn-primary btn-sm'%>
                   <%= link_to "Delete", post_definition_path(post),
                                 method: :delete,
                                 data: { confirm: 'Are you sure?' },
-                                class: 'btn btn-secondary btn-sm'%>
+                                class: 'btn btn-danger btn-sm'%>
                 </td>
               </tr>
             <% end %>
           </tbody>
-      </table>
+          <%= paginate @posts %>
+        </table>
+
+      </div>
+    </div>
   </div>
-</div>
+</div>  
+
+

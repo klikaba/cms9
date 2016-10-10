@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency "dragonfly", "~> 1.0.12"
   s.add_dependency "mini_magick"
   s.add_dependency "ckeditor"
+  s.add_dependency "kaminari"
 
   s.add_development_dependency "pry"
   s.add_development_dependency "web-console"

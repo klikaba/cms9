@@ -1,7 +1,11 @@
 module Cms9
   class PostsController < Cms9::ApplicationController
     def index
-      @posts = Post.all
+      @post_definition = Cms9::PostDefinition.find(params[:post_definition_id])
+      @posts = Post.where(post_definition: @post_definition)
+                  .order('created_at desc')
+                  .page(params[:page])
+                  .per(20)
     end
 
     def new
@@ -17,7 +21,7 @@ module Cms9
       @post = Post.new(post_params)
 
       if @post.save
-        redirect_to posts_path
+        redirect_to posts_path(post_definition_id: @post.post_definition.id)
       end
     end
 
@@ -29,15 +33,16 @@ module Cms9
       @post = Post.find(params[:id])
 
       if @post.update(post_params)
-        redirect_to posts_path
+        redirect_to posts_path(post_definition_id: @post.post_definition.id)
       end
     end
 
     def destroy
       @post = Post.find(params[:id])
+      post_definition_id = @post.post_definition.id
       @post.destroy
 
-      redirect_to posts_path
+      redirect_to posts_path(post_definition_id: post_definition.id)
     end
 
     private
