@@ -18,7 +18,7 @@ module Cms9
 
     def authorize
       unless current_user.cms9_admin?
-        raise 'Missing cms9_admin? implementation in current_user'
+        @missing_implementation = true
       end
     end
 
@@ -31,7 +31,7 @@ module Cms9
 
   class User
     def cms9_admin?
-      return true
+      return false
     end
   end
 
