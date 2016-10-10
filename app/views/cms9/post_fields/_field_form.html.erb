@@ -2,7 +2,7 @@
     <%= f.label :name %><br>
     <%= f.text_field :name, class: "form-control"%>
     <%= f.label :field_type %><br>
-    <%= f.select :field_type, Cms9::PostField.all_types, { prompt: 'Select Type' }, { class: 'form-control type-selector', disabled: edit } %>
+    <%= f.select :field_type, Cms9::PostField.all_types.map { |a| [a[:display_name], a[:key]] }, { prompt: 'Select Type' }, { class: 'form-control type-selector', disabled: edit } %>
 
     <div id="valueSet" style="display: none;">
       <p style="margin-top: 20px; font-weight: bold;">Multiple choices</p>

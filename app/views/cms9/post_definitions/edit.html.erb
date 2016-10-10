@@ -49,7 +49,7 @@
             <% @post.post_fields.each do |field| %>
               <tr>
                 <td><%= field.name %></td>
-                <td><%= type_formatter(field.field_type) %></td>
+                <td><%= Cms9::PostField.all_types.find { |h| h[:key] == field.field_type }[:display_name] %></td>
                 <td class="required-field-icons">
                     <% if field.required %>
                       <i class="fa fa-check" aria-hidden="true"></i>
@@ -74,5 +74,4 @@
       </div>
     </div>
   </div>
-</div>  
-
+</div>

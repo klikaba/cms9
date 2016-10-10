@@ -4,7 +4,17 @@ module Cms9
     attr_accessor :multi_values
 
     def self.all_types
-      return ['text', 'text_area', 'number', 'select_single', 'select_multiple', 'date', 'time', 'date_time', 'image']
+      return [
+        { key: 'text', display_name: 'Text' },
+        { key: 'text_area', display_name: 'Text Area' },
+        { key: 'number', display_name: 'Number'},
+        { key: 'select_single', display_name: 'Select Single' },
+        { key: 'select_multiple', display_name: 'Select Multiple' },
+        { key: 'date', display_name: 'Date' },
+        { key: 'time', display_name: 'Time' },
+        { key: 'date_time', display_name: 'Date & Time' },
+        { key: 'image', display_name: 'Image' }
+      ]
     end
   end
 end
