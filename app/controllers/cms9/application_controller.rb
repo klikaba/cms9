@@ -7,8 +7,10 @@ module Cms9
 
     def current_user
       current_user_ident = Cms9.configuration.current_user || :current_user
-      if ::ApplicationController.respond_to?(current_user_ident)
-        ::ApplicationController.send(current_user_ident)
+
+      parent = parent_controller
+      if parent.respond_to?(current_user_ident)
+        parent.send(current_user_ident)
       else
         return Cms9::User.new
       end
@@ -19,6 +21,12 @@ module Cms9
         raise 'Missing cms9_admin? implementation in current_user'
       end
     end
+
+    private
+      def parent_controller
+        controller = ::ApplicationController.new
+        controller.request = request
+      end
   end
 
   class User
