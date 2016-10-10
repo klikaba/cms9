@@ -7,7 +7,7 @@
     <title>Cms9</title>
     <%= stylesheet_link_tag "cms9/application", media: "all" %>
     <%= javascript_include_tag "cms9/application" %>
-    <%= csrf_meta_tags %>    
+    <%= csrf_meta_tags %>
   </head>
 
   <body class="skin-blue">
@@ -30,7 +30,7 @@
 
 
     <div class="wrapper row-offcanvas row-offcanvas-left">
-      <aside class="left-side sidebar-offcanvas">                
+      <aside class="left-side sidebar-offcanvas">
         <section class="sidebar">
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
@@ -46,7 +46,7 @@
             </li>
             <li class="header">POST TYPES</li>
             <% Cms9::PostDefinition.all.each do |post_def| %>
-              <li>
+              <li class="<%= 'active' if params[:post_definition_id] == post_def.id.to_s %>">
               <%= link_to posts_path(post_definition_id: post_def.id) do %>
                 <i class="fa fa-edit" aria-hidden="true"></i> <%= post_def.name.pluralize %>
               <% end %>
@@ -56,8 +56,8 @@
         </section>
       </aside>
 
-      <aside class="right-side">                
-        <section class="content">        
+      <aside class="right-side">
+        <section class="content">
           <%= yield %>
         </section>
       </aside>
