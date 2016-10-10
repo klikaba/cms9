@@ -42,13 +42,13 @@ module Cms9
       post_definition_id = @post.post_definition.id
       @post.destroy
 
-      redirect_to posts_path(post_definition_id: post_definition.id)
+      redirect_to posts_path(post_definition_id: post_definition_id)
     end
 
     private
       def post_params
         params.require(:post).permit(:post_definition_id, fields_attributes:
-                                    [:id, :post_id, :post_field_id, :value,
+                                    [:id, :post_id, :post_field_id, :value, {:value => []},
                                      :image, :image_uid, :image_name, :remove_image, :image_custom_size])
       end
 
