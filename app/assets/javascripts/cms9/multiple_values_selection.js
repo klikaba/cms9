@@ -15,7 +15,7 @@ $(document).ready(function(){
           $("#valueSet").css('display', 'block');
           $("#addNewValue").css('visibility', 'visible');
         } else {
-          $('input[type="text"]').val('');
+          $('input.multi-pick[type="text"]').val('');
           $("#valueSet").css('display', 'none');
           $("#addNewValue").css('visibility', 'hidden');
         }
