@@ -23,7 +23,7 @@ module Cms9
           'post_definition_id': @post.id
         })
         if @field.save
-          redirect_to post_definitions_path
+          redirect_to edit_post_definition_path(@post.id)
         end
       else
         render 'new'
