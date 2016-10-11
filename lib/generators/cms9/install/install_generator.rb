@@ -28,14 +28,6 @@ module Cms9
         end
       end
 
-      def self.next_migration_number(path)
-        Time.now.utc.strftime("%Y%m%d%H%M%S")
-      end
-
-      def copy_migrations_config
-        migration_template "templates/init_cms9_tables.rb", "db/migrate/init_cms9_tables.rb"
-      end
-
       private
         def file_name
           def_route.underscore

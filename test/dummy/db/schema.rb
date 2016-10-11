@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161006165124) do
+ActiveRecord::Schema.define(version: 20161004140055) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_uid",                  null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20161006165124) do
   create_table "cms9_fields", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "post_field_id"
-    t.string   "value"
+    t.text     "value"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.text     "image"
