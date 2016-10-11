@@ -17,9 +17,8 @@ module Cms9
     end
 
     def authorize
-      unless current_user.cms9_admin?
-        @missing_implementation = true
-      end
+      @missing_implementation = current_user.instance_of?(Cms9::User)
+      # TODO - Log missing implementation ...
     end
 
     private
