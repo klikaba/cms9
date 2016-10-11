@@ -7,6 +7,7 @@ module Cms9
 
     def create
       @field = PostField.new(post_field_params)
+      
       if PostField.where(name: @field[:name]).blank?
         @field.multiple_choices = ''
         values = params[:multi_values]
