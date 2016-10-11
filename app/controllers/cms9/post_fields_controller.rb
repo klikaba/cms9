@@ -5,6 +5,31 @@ module Cms9
       @post.post_definition_id = params[:post_definition_id]
     end
 
+    def create
+      @field = PostField.new(post_field_params)
+      if PostField.where(name: @field[:name]).blank?
+        @field.multiple_choices = ''
+        values = params[:multi_values]
+
+        values.each_with_index do |value, index|
+          if value != ''
+            if index == 0
+              @field.multiple_choices = value
+            elsif
+              @field.multiple_choices = @field.multiple_choices + ',' + value
+            end
+          end
+        end
+
+        if @field.save
+          redirect_to edit_post_definition_path(:id => @field.post_definition_id)
+        end
+      else
+        flash[:notice] = "Field with '" + @field[:name] + "' name already exist"
+        redirect_to request.referrer
+      end
+    end
+
     def edit
       @post = PostField.find(params[:id])
       @post_name = params[:post]
@@ -18,31 +43,16 @@ module Cms9
       end
     end
 
-    def create
-      @field = PostField.new(post_field_params)
-      @field.multiple_choices = ''
-      values = params[:multi_values]
-
-      values.each_with_index do |value, index|
-        if value != ''
-          if index == 0
-            @field.multiple_choices = value
-          elsif
-            @field.multiple_choices = @field.multiple_choices + ',' + value
-          end
-        end
-      end
-
-      if @field.save
-        redirect_to edit_post_definition_path(:id => @field.post_definition_id)
-      end
-    end
-
     def update
       @field = PostField.find(params[:id])
 
-      if @field.update(post_field_params)
-        redirect_to edit_post_definition_path(:id => @field.post_definition_id)
+      if PostField.where(name: post_field_params[:name]).blank?
+        if @field.update(post_field_params)
+          redirect_to edit_post_definition_path(:id => @field.post_definition_id)
+        end
+      else
+        flash[:notice] = "Field with '" + post_field_params[:name] + "' name already exist"
+        redirect_to request.referrer
       end
     end
 
