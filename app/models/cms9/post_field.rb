@@ -1,5 +1,8 @@
 module Cms9
   class PostField < ApplicationRecord
+    validates :name,  presence: true,  length: { minimum:3, maximum: 15 }
+    validates :field_type, presence: true
+
     belongs_to :post_definition
     attr_accessor :multi_values
 

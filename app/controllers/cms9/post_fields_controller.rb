@@ -1,8 +1,8 @@
 module Cms9
   class PostFieldsController < Cms9::ApplicationController
     def new
-      @post = PostField.new
-      @post.post_definition_id = params[:post_definition_id]
+      @field = PostField.new
+      @field.post_definition_id = params[:post_definition_id]
     end
 
     def create
@@ -23,24 +23,26 @@ module Cms9
         end
 
         if @field.save
-          redirect_to edit_post_definition_path(:id => @field.post_definition_id)
+          redirect_to edit_post_definition_path(id: @field.post_definition_id)
+        else
+          render :new
         end
       else
-        flash[:notice] = "Field with '" + @field[:name] + "' name already exist"
-        redirect_to request.referrer
+        @field.errors.add(:name, "of field already exist")
+        render :new
       end
     end
 
     def edit
-      @post = PostField.find(params[:id])
+      @field = PostField.find(params[:id])
       @post_name = params[:post]
 
       if PostField.all_types.index(params[:type]) != nil
-        @post.field_type = params[:type]
+        @field.field_type = params[:type]
       end
 
       if params[:field_name] != nil
-        @post.name = params[:field_name]
+        @field.name = params[:field_name]
       end
     end
 
@@ -51,19 +53,18 @@ module Cms9
       if field.blank? || field.pluck(:id)[0].to_s == params[:id]
         if @field.update(post_field_params)
           redirect_to edit_post_definition_path(:id => @field.post_definition_id)
+        else
+          render :edit
         end
       else
-        flash[:notice] = "Field with '" + post_field_params[:name] + "' name already exist"
-        redirect_to request.referrer
+        @field.errors.add(:name, "of field already exist")
+        render :edit
       end
     end
 
     def destroy
       @field = PostField.find(params[:id])
       @field.destroy
-
-      #@field_values = Field.where(post_field_id: params[:id])
-      #@field_values.destroy_all
 
       redirect_to request.referrer
     end

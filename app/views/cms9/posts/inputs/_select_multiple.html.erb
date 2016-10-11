@@ -1,7 +1,7 @@
 <%= field.label field.object.post_field.name %>
 <% if field.object.value %>
   <% noEmptyValue = ActiveSupport::JSON.decode(field.object.value) %>
-  <%= field.select :value, options_for_select(field.object.post_field.multiple_choices.split(','), noEmptyValue), {}, { multiple: true, class: 'form-control type-selector' } %>
+  <%= field.select :value, options_for_select(field.object.post_field.multiple_choices.split(','), noEmptyValue), {}, { multiple: true, class: 'form-control type-selector', required: field.object.post_field.required } %>
 <% else %>
-  <%= field.select :value, options_for_select(field.object.post_field.multiple_choices.split(',')), {}, { multiple: true, class: 'form-control type-selector' } %>
+  <%= field.select :value, options_for_select(field.object.post_field.multiple_choices.split(',')), {}, { multiple: true, class: 'form-control type-selector', required: field.object.post_field.required } %>
 <% end %>

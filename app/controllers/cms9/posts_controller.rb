@@ -22,6 +22,8 @@ module Cms9
 
       if @post.save
         redirect_to posts_path(post_definition_id: @post.post_definition.id)
+      else
+        render :new
       end
     end
 
@@ -40,6 +42,8 @@ module Cms9
 
       if @post.update(post_params)
         redirect_to posts_path(post_definition_id: @post.post_definition.id)
+      else
+        render :edit
       end
     end
 
