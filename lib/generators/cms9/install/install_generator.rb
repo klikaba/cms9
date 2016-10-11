@@ -5,7 +5,6 @@ module Cms9
   module Generators
     class InstallGenerator < Rails::Generators::Base
       argument :def_route, type: :string, default: "cms9"
-      include Rails::Generators::Migration
       source_root File.expand_path(File.dirname(__FILE__))
 
       def mount_engine_route
