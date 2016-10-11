@@ -64,8 +64,14 @@
         <% if flash[:notice] %>
           <div class="alert alert-warning alert-dismissible custom-alert">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+            <h4><i class="icon fa fa-warning"></i> Warning!</h4>
             <%= flash[:notice] %>
+          </div>
+        <% elsif flash[:alert] %>
+          <div class="alert alert-danger alert-dismissible custom-alert">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+            <%= flash[:alert] %>
           </div>
         <% end %>
         <% if @missing_implementation %>
