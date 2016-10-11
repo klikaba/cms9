@@ -7,8 +7,8 @@ module Cms9
 
     def create
       @field = PostField.new(post_field_params)
-      
-      if PostField.where(name: @field[:name]).blank?
+
+      if PostField.where(name: @field[:name], post_definition_id: @field[:post_definition_id]).blank?
         @field.multiple_choices = ''
         values = params[:multi_values]
 
@@ -46,8 +46,9 @@ module Cms9
 
     def update
       @field = PostField.find(params[:id])
+      field = PostField.where(name: post_field_params[:name], post_definition_id: @field[:post_definition_id])
 
-      if PostField.where(name: post_field_params[:name]).blank?
+      if field.blank? || field.pluck(:id)[0].to_s == params[:id]
         if @field.update(post_field_params)
           redirect_to edit_post_definition_path(:id => @field.post_definition_id)
         end
