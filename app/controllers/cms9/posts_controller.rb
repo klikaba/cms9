@@ -27,6 +27,12 @@ module Cms9
 
     def edit
       @post = Post.find(params[:id])
+
+      @post.post_definition.post_fields.each do |post_field|
+        if @post.fields.where(post_field_id: post_field[:id]).blank?
+          @post.fields.build(post_field: post_field)
+        end
+      end
     end
 
     def update
