@@ -21,5 +21,9 @@ module Cms9
       end
     end
 
+    config.to_prepare do
+      ::ApplicationController.helper(Cms9::ApplicationHelper)
+    end
+
   end
 end
