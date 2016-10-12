@@ -7,6 +7,7 @@ require 'bootstrap-sass'
 require 'rails-assets-tether'
 require 'font-awesome-rails'
 require 'ckeditor'
+require 'cms9'
 
 module Cms9
   class Engine < ::Rails::Engine
