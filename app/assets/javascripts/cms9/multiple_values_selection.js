@@ -27,19 +27,20 @@ $(document).ready(function(){
           $('#image_sizer').css('display', 'block');
           $("#valueSet").css('display', 'none');
           $("#addNewValue").css('visibility', 'hidden');
+          resetFields();
         } else {
           $('#image_sizer').css('display', 'none');
           $('input.multi-pick[type="text"]').val('');
           $('input.image-sizer[type="text"]').val('');
           $("#valueSet").css('display', 'none');
           $("#addNewValue").css('visibility', 'hidden');
+          resetFields();
         }
     });
 
     $("#addNewValue").click(function(){
       if(count < maxFields) {
         $("#valueSet").append($("#selector_").html());
-
         $('input', $('#valueSet')).each(function () {
           $(this).attr('required', true);
         });
@@ -47,4 +48,21 @@ $(document).ready(function(){
         count++;
       }
     });
+
+    function resetFields() {
+      $('#valueSet .multi-block').each(function(index) {
+        if(index !== 0) {
+          $(this).remove();
+        }
+      });
+
+      count = 1;
+    }
+
+    deleteChoice = function(el) {
+       $(el).parent().parent().parent().fadeOut(300, function() {
+         $(this).remove();
+         count--;
+       });
+    }
 });

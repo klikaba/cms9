@@ -1,5 +1,10 @@
 <div class="multi-block col-md-12" style="padding: 0;">
-  <div class="col-md-10" style="padding: 0;">
-    <%= text_field_tag 'multi_values[]', nil, { class: 'form-control multi-pick', style: 'margin-bottom: 10px;', pattern: '^[\w ]+$', required: false } %>
+  <div class="col-md-10 input-group" style="padding: 0; margin-bottom: 10px;">
+    <%= text_field_tag 'multi_values[]', nil, { class: 'form-control multi-pick', pattern: '^[\w ]+$', required: false } %>
+    <div class="input-group-btn">
+      <a href="javascript:;" onclick="deleteChoice(this)" class="btn btn-danger btn-delete-choice">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+      </a>
+    </div>
   </div>
 </div>
