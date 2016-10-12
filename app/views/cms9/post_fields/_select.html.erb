@@ -1,5 +1,13 @@
 <div class="multi-block col-md-12" style="padding: 0;">
   <div class="col-md-10" style="padding: 0;">
-    <%= text_field_tag 'multi_values[]', nil, { class: 'form-control multi-pick', style: 'margin-bottom: 10px;' }%>
+    <% if edit %>
+      <% @field.metadata.split(',').each do |input| %>
+        <% if !input.blank? %>
+          <%= text_field_tag 'multi_values[]', input, { class: 'form-control multi-pick', style: 'margin-bottom: 10px;', pattern: '^[\w ]+$', required: true } %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= text_field_tag 'multi_values[]', nil, { class: 'form-control multi-pick', style: 'margin-bottom: 10px;', pattern: '^[\w ]+$', required: true } %>
+    <% end %>
   </div>
 </div>

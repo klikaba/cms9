@@ -1,4 +1,4 @@
-<%= field.label field.object.post_field.name, { style: 'margin-top: 20px;'} %>
+<%= field.label field.object.post_field.name + " ( " + field.object.post_field.metadata + " )", { style: 'margin-top: 20px;'} %>
 
 <% if field.object.image_stored? %>
   <%= link_to "Remove", '#', {

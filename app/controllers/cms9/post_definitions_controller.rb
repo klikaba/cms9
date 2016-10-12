@@ -28,7 +28,7 @@ module Cms9
             redirect_to edit_post_definition_path(@post.id)
           end
         else
-          render 'new'
+          render :new
         end
 
       else
@@ -46,7 +46,7 @@ module Cms9
         if @post.update(post_definition_params)
           redirect_to post_definitions_path
         else
-          render 'edit'
+          render :edit
         end
 
       else

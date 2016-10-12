@@ -1,2 +1,2 @@
 <%= field.label field.object.post_field.name %>
-<%= field.select :value, field.object.post_field.multiple_choices.split(','), { prompt: 'Select Type' }, { class: 'form-control type-selector', required: field.object.post_field.required } %>
+<%= field.select :value, field.object.post_field.metadata.split(','), { prompt: 'Select Type' }, { class: 'form-control type-selector', required: field.object.post_field.required } %>

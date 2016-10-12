@@ -23,13 +23,17 @@
         { prompt: 'Select Type' }, { class: 'form-control type-selector', disabled: edit, required: true } %>
 
     <div id="valueSet" style="display: none;">
-      <p style="margin-top: 20px; font-weight: bold;">Multiple choices</p>
-      <%= render 'select', { f: f } %>
+      <p style="margin-top: 20px; font-weight: bold;">Multiple choices (naming without special characters)</p>
+      <%= render 'select', { f: f, edit: edit } %>
     </div>
     <a href="javascript:;" id="addNewValue" class="btn btn-primary btn-sm" style="visibility: hidden;">Add New Choice</a>
 
     <div id="selector_" style="display: none;">
-      <%= render 'select', { f: f } %>
+      <%= render 'select_blank', { f: f } %>
+    </div>
+
+    <div id="image_sizer" style="display: none;">
+      <%= render 'image_sizer', { f: f } %>
     </div>
 
     <div class="checkbox" style="margin-top: 10px;">

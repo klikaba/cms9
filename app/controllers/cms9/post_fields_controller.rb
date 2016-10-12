@@ -9,17 +9,21 @@ module Cms9
       @field = PostField.new(post_field_params)
 
       if PostField.where(name: @field[:name], post_definition_id: @field[:post_definition_id]).blank?
-        @field.multiple_choices = ''
-        values = params[:multi_values]
+        if @field[:field_type] == 'select_single' || @field[:field_type] == 'select_multiple'
+          @field.metadata = ''
+          values = params[:multi_values]
 
-        values.each_with_index do |value, index|
-          if value != ''
-            if index == 0
-              @field.multiple_choices = value
-            elsif
-              @field.multiple_choices = @field.multiple_choices + ',' + value
+          values.each_with_index do |value, index|
+            if value != ''
+              if index == 0
+                @field.metadata = value
+              elsif
+                @field.metadata = @field.metadata + ',' + value
+              end
             end
           end
+        elsif @field[:field_type] != 'select_single' && @field[:field_type] != 'select_multiple' && @field[:field_type] != 'image'
+          @field.metadata = nil
         end
 
         if @field.save
@@ -51,8 +55,28 @@ module Cms9
       field = PostField.where(name: post_field_params[:name], post_definition_id: @field[:post_definition_id])
 
       if field.blank? || field.pluck(:id)[0].to_s == params[:id]
+        if @field[:field_type] == 'select_single' || @field[:field_type] == 'select_multiple'
+          @field.metadata = ''
+          values = params[:multi_values]
+
+          values.each_with_index do |value, index|
+            if value != ''
+              if index == 0
+                @field.metadata = value
+              elsif
+                @field.metadata = @field.metadata + ',' + value
+              end
+            end
+          end
+
+          params[:post_field][:metadata] = @field.metadata
+
+        elsif @field[:field_type] != 'select_single' && @field[:field_type] != 'select_multiple' && @field[:field_type] != 'image'
+          @field.metadata = nil
+        end
+
         if @field.update(post_field_params)
-          redirect_to edit_post_definition_path(:id => @field.post_definition_id)
+          redirect_to edit_post_definition_path(id: @field.post_definition_id)
         else
           render :edit
         end
@@ -71,7 +95,7 @@ module Cms9
 
     private
       def post_field_params
-        params.require(:post_field).permit(:name, :field_type, :post_definition_id, :required, :multiple_choices)
+        params.require(:post_field).permit(:name, :field_type, :post_definition_id, :required, :metadata)
       end
   end
 end

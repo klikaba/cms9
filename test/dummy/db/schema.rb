@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004140055) do
+ActiveRecord::Schema.define(version: 20161012135405) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_uid",                  null: false
@@ -31,13 +31,15 @@ ActiveRecord::Schema.define(version: 20161004140055) do
   create_table "cms9_fields", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "post_field_id"
-    t.text     "value"
+    t.string   "value"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.text     "image"
     t.string   "image_uid"
     t.string   "image_name"
     t.string   "image_custom_size"
+    t.index ["post_field_id"], name: "index_cms9_fields_on_post_field_id"
+    t.index ["post_id"], name: "index_cms9_fields_on_post_id"
   end
 
   create_table "cms9_post_definitions", force: :cascade do |t|
@@ -53,7 +55,7 @@ ActiveRecord::Schema.define(version: 20161004140055) do
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.boolean  "required",           default: false, null: false
-    t.string   "multiple_choices"
+    t.text     "metadata"
     t.index ["post_definition_id"], name: "index_cms9_post_fields_on_post_definition_id"
   end
 
