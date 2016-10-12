@@ -13,14 +13,12 @@ module Cms9
   class Engine < ::Rails::Engine
     isolate_namespace Cms9
 
-
     require 'kaminari'
+
     initializer :append_migrations do |app|
-        unless app.root.to_s.match(root.to_s)
-            config.paths["db/migrate"].expanded.each do |expand_path|
-                app.config.paths['db/migrate'] << expand_path
-            end
-        end
+      app.class.configure do
+        config.paths['db/migrate'] = Cms9::Engine.paths['db/migrate'].existent
+      end
     end
 
   end

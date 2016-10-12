@@ -15,28 +15,43 @@ module Cms9
     def create
       @post = PostDefinition.new(post_definition_params)
 
-      if @post.save
-        @field = PostField.new({
-          'name': 'Title',
-          'field_type': 'text',
-          'required': true,
-          'post_definition_id': @post.id
-        })
-        if @field.save
-          redirect_to post_definitions_path
+      if PostDefinition.where(name: @post[:name]).blank?
+
+        if @post.save
+          @field = PostField.new({
+            'name': 'Title',
+            'field_type': 'text',
+            'required': true,
+            'post_definition_id': @post.id
+          })
+          if @field.save
+            redirect_to edit_post_definition_path(@post.id)
+          end
+        else
+          render 'new'
         end
+
       else
-        render 'new'
+        @post.errors.add(:name, " Post Type already exist")
+        render :new
       end
+
     end
 
     def update
       @post = PostDefinition.find(params[:id])
 
-      if @post.update(post_definition_params)
-        redirect_to post_definitions_path
+      if PostDefinition.where(name: @post[:name]).blank?
+
+        if @post.update(post_definition_params)
+          redirect_to post_definitions_path
+        else
+          render 'edit'
+        end
+
       else
-        render 'edit'
+        @post.errors.add(:name, " Post Type already exist")
+        render :edit
       end
     end
 

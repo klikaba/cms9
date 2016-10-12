@@ -11,7 +11,7 @@ Cms9's dashboard give non-technical users clean interfaces
 that allow them to create, edit, search, and delete definitions,
 field types and posts related to it.
 
-Cms9 provides a better user experience and it easy for developers to customize.
+Cms9 provides a better user experience and it's easy for developers to customize.
 
 ### Features
 * Custom actions
@@ -20,7 +20,7 @@ Cms9 provides a better user experience and it easy for developers to customize.
 * Supported ORM ActiveRecord
 * [Dragonfly](https://github.com/markevans/dragonfly) for handling images and other attachments
 * [Ckeditor](https://github.com/galetahub/ckeditor) as default WYSIWYG text editor
-* Bootstrap 3+ with PaperDashboard template
+* Bootstrap 3+ with Admin LTE template
   * Can be used or extended for wider usage
 
 ## Getting Started
@@ -39,21 +39,7 @@ $ rails generate cms9:install [DEF_ROUTE]
 ```
 Where [DEF_ROUTE] is optional and presents where your Cms9 route will be mounted, by default it's /cms9
 
-**Note**: If your Cms9 is not mounted on /cms9 route, you should update 'app/assets/javascripts/ckeditor/config.js' with proper route.
-
-For example if our route is mounted as 'cms9_admin':
-
-```javascript
-CKEDITOR.editorConfig = function(config) {
-
-  config.filebrowserBrowseUrl = "/cms9_admin/ckeditor/attachment_files";
-  ...
-
-  return true;
-};
-```
-
-Next, check the MODEL for any additional configuration options you might want to add, such as confirmable or lockable. If you add an option, be sure to inspect the migration file
+Install generator will mount Cms9 route, add current_user configurator initializer and additional configuration for Ckeditor.
 
 Then run:
 
@@ -61,14 +47,14 @@ Then run:
 $ rails db:migrate
 ```
 
-Restart your server, and visit http://localhost:3000/cms9
+Restart your server, and visit http://localhost:3000/cms9 (or where you defined Cms9 to be mounted)
 to see your new Cms9 dashboard in action.
 
 ## Configuration
 
 Authorization can be added using the current_user method. If you pass a block it will be triggered through a before filter on every action in Cms9.
 
-To begin with, you may be interested in setting up [Devise](https://github.com/sferik/rails_admin/wiki/Devise), [CanCanCan](https://github.com/sferik/rails_admin/wiki/Cancancan) or [Papertrail](https://github.com/sferik/rails_admin/wiki/Papertrail)!
+To begin with, you may be interested in setting up [Devise](https://github.com/sferik/rails_admin/wiki/Devise) or something else.
 
 In `config/initializers/cms9_configurator.rb`:
 
@@ -79,7 +65,6 @@ Cms9.configure do |config|
   config.current_user =  :current_user
 end
 ```
-
 
 
 ## License

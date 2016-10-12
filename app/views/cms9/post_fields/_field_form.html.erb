@@ -1,8 +1,26 @@
-<%= form_for @post do |f| %>
+<%= form_for @field do |f| %>
+    <% if @field.errors.any? %>
+
+      <div class="callout callout-danger">
+        <h4>
+          <%= pluralize(@field.errors.count, "error") %> prohibited
+          this article from being saved:
+        </h4>
+
+        <div>
+          <% @field.errors.full_messages.each do |msg| %>
+            <p><%= msg %></p>
+          <% end %>
+        </div>
+      </div>
+
+    <% end %>
+
     <%= f.label :name %><br>
-    <%= f.text_field :name, class: "form-control"%>
+    <%= f.text_field :name, { class: "form-control", required: true }%>
     <%= f.label :field_type %><br>
-    <%= f.select :field_type, Cms9::PostField.all_types, { prompt: 'Select Type' }, { class: 'form-control type-selector', disabled: edit } %>
+    <%= f.select :field_type, Cms9::PostField.all_types.map { |a| [a[:display_name], a[:key]] },
+        { prompt: 'Select Type' }, { class: 'form-control type-selector', disabled: edit, required: true } %>
 
     <div id="valueSet" style="display: none;">
       <p style="margin-top: 20px; font-weight: bold;">Multiple choices</p>

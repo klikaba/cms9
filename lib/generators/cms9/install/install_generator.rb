@@ -1,4 +1,5 @@
 require "rails/generators/base"
+require 'rails/generators/migration'
 
 module Cms9
   module Generators
@@ -12,11 +13,18 @@ module Cms9
       end
 
       def copy_initializer
-        copy_file 'cms9_configurator.rb', 'config/initializers/cms9_configurator.rb'
+        copy_file 'templates/cms9_configurator.rb', 'config/initializers/cms9_configurator.rb'
       end
 
       def copy_ckeditor_config
-        copy_file 'ckeditor_config.js', 'app/assets/javascripts/ckeditor/config.js'
+        copy_file 'templates/ckeditor_config.js', 'app/assets/javascripts/ckeditor/config.js'
+
+        data = File.read("app/assets/javascripts/ckeditor/config.js")
+        filtered_data = data.gsub("cms9", file_name)
+
+        File.open("app/assets/javascripts/ckeditor/config.js", "w") do |f|
+          f.write(filtered_data)
+        end
       end
 
       private

@@ -9,9 +9,26 @@
       <div class="box-body">
         <%= form_for @post do |f| %>
 
+            <% if @post.errors.any? %>
+
+              <div class="callout callout-danger">
+                <h4>
+                  <%= pluralize(@post.errors.count, "error") %> prohibited
+                  this article from being saved:
+                </h4>
+
+                <div>
+                  <% @post.errors.full_messages.each do |msg| %>
+                    <p><%= msg %></p>
+                  <% end %>
+                </div>
+              </div>
+
+            <% end %>
+
             <div class="form-group">
               <%= f.label :name %><br>
-              <%= f.text_field :name, class: "form-control"%>
+              <%= f.text_field :name, { class: "form-control", required: true } %>
             </div>
 
             <%= f.submit class: 'btn btn-primary' %>
@@ -21,6 +38,4 @@
       </div>
     </div>
   </div>
-</div>  
-
-
+</div>
