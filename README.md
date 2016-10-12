@@ -38,6 +38,7 @@ Re-bundle, then run the installer:
 $ rails generate cms9:install [DEF_ROUTE]
 ```
 Where [DEF_ROUTE] is optional and presents where your Cms9 route will be mounted, by default it's /cms9
+
 Install generator will mount Cms9 route, add current_user configurator initializer and additional configuration for Ckeditor.
 
 Then run:

@@ -29,7 +29,7 @@
           <%= f.label :name %><br>
 
           <div class="input-group">
-            <%= f.text_field :name, class: "form-control"%>
+            <%= f.text_field :name, { class: "form-control", required: true } %>
 
             <div class="input-group-btn">
               <%= f.submit class: 'btn btn-primary'%>
