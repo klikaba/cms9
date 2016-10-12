@@ -46,10 +46,11 @@ $(document).ready(function(){
         count++;
       }
     });
-});
 
-function deleteChoice(el) {
-   $(el).parent().parent().fadeOut(300, function() {
-     $(this).remove();
-   });
-}
+    deleteChoice = function(el) {
+       $(el).parent().parent().fadeOut(300, function() {
+         $(this).remove();
+         count--;
+       });
+    }
+});
