@@ -19,3 +19,5 @@ module Cms9
     end
   end
 end
+
+require "sdk/cms9"

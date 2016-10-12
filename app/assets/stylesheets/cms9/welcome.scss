@@ -5,3 +5,10 @@
 .fr-toolbar {
   border-top: 5px solid #EB5E28 !important;
 }
+
+.custom-alert {
+  position: fixed;
+  bottom: 0;
+  right: 10px;
+  z-index: 999;
+}

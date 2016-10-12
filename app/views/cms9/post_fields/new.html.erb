@@ -3,14 +3,12 @@
     <div class="box box-info">
       <div class="box-header">
         <h3 class="box-title">
-          Add Field for <%= @post.post_definition.name %>
+          Add Field for <%= @field.post_definition.name %>
         </h3>
       </div>
       <div class="box-body">
-        <%= render 'field_form', edit: false%>
+        <%= render 'field_form', { edit: false } %>
       </div>
     </div>
   </div>
-</div>  
-
-
+</div>

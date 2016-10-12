@@ -1,2 +1,2 @@
 <%= field.label field.object.post_field.name %>
-<%= field.text_field :value, class: 'form-control'%>
+<%= field.text_field :value, { class: 'form-control', required: field.object.post_field.required, minlength: 3 }%>

@@ -7,12 +7,12 @@
     <title>Cms9</title>
     <%= stylesheet_link_tag "cms9/application", media: "all" %>
     <%= javascript_include_tag "cms9/application" %>
-    <%= csrf_meta_tags %>    
+    <%= csrf_meta_tags %>
   </head>
 
   <body class="skin-blue">
   <header class="main-header">
-    <a href="index2.html" class="logo">
+    <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>CMS</b>9</span>
       <!-- logo for regular state and mobile devices -->
@@ -30,7 +30,7 @@
 
 
     <div class="wrapper row-offcanvas row-offcanvas-left">
-      <aside class="left-side sidebar-offcanvas">                
+      <aside class="left-side sidebar-offcanvas">
         <section class="sidebar">
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
@@ -46,7 +46,11 @@
             </li>
             <li class="header">POST TYPES</li>
             <% Cms9::PostDefinition.all.each do |post_def| %>
-              <li>
+              <% if params[:id] %>
+                <li class="<%= 'active' if params[:controller] == 'cms9/posts' && Cms9::Post.find(params[:id]).post_definition_id == post_def.id %>">
+              <% else %>
+                <li class="<%= 'active' if params[:controller] == 'cms9/posts' && params[:post_definition_id] == post_def.id.to_s %>">
+              <% end %>
               <%= link_to posts_path(post_definition_id: post_def.id) do %>
                 <i class="fa fa-edit" aria-hidden="true"></i> <%= post_def.name.pluralize %>
               <% end %>
@@ -56,8 +60,15 @@
         </section>
       </aside>
 
-      <aside class="right-side">                
-        <section class="content">        
+      <aside class="right-side">
+        <% if @missing_implementation %>
+          <div class="bg-red" style="padding: 20px 30px; z-index: 999999; font-size: 16px; font-weight: 600;">
+            <p style="display: inline-block; margin-right: 10px; text-decoration: none;">
+              Missing cms9_admin? implementation in current_user. Be sure to implement it before publishing your application.
+            </p>
+          </div>
+        <% end %>
+        <section class="content">
           <%= yield %>
         </section>
       </aside>
