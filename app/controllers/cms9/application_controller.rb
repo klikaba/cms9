@@ -17,8 +17,16 @@ module Cms9
     end
 
     def authorize
+      unless current_user.cms9_admin?
+        redirect_to '/'
+      end
       @missing_implementation = current_user.instance_of?(Cms9::User)
-      # TODO - Log missing implementation ...
+      Rails.logger.error '  *************************************************************************'
+      Rails.logger.error '  *                                                                       *'
+      Rails.logger.error '  *  YOUR CMS IS OPENED FOR EDITING!!!                                    *'
+      Rails.logger.error '  *  PLEASE IMPLEMENT cms9_admin? METHOD FOR current_user!                *'
+      Rails.logger.error '  *                                                                       *'
+      Rails.logger.error '  *************************************************************************'
     end
 
     private
@@ -30,7 +38,7 @@ module Cms9
 
   class User
     def cms9_admin?
-      return false
+      return true
     end
   end
 
