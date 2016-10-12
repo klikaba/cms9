@@ -39,7 +39,6 @@ $(document).ready(function(){
     $("#addNewValue").click(function(){
       if(count < maxFields) {
         $("#valueSet").append($("#selector_").html());
-
         $('input', $('#valueSet')).each(function () {
           $(this).attr('required', true);
         });
@@ -48,3 +47,9 @@ $(document).ready(function(){
       }
     });
 });
+
+function deleteChoice(el) {
+   $(el).parent().parent().fadeOut(300, function() {
+     $(this).remove();
+   });
+}
