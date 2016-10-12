@@ -17,8 +17,8 @@
   <% end %>
 <% else %>
   <div class="multi-block col-md-12" style="padding: 0;">
-    <div class="col-md-10" style="padding: 0;">
-      <%= text_field_tag 'multi_values[]', nil, { class: 'form-control multi-pick', style: 'margin-bottom: 10px;', pattern: '^[\w ]+$', required: true } %>
+    <div class="col-md-10" style="padding: 0; margin-bottom: 10px;">
+      <%= text_field_tag 'multi_values[]', nil, { class: 'form-control multi-pick', pattern: '^[\w ]+$', required: true } %>
     </div>
   </div>
 <% end %>

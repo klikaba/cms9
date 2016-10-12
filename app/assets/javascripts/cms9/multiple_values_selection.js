@@ -27,12 +27,14 @@ $(document).ready(function(){
           $('#image_sizer').css('display', 'block');
           $("#valueSet").css('display', 'none');
           $("#addNewValue").css('visibility', 'hidden');
+          resetFields();
         } else {
           $('#image_sizer').css('display', 'none');
           $('input.multi-pick[type="text"]').val('');
           $('input.image-sizer[type="text"]').val('');
           $("#valueSet").css('display', 'none');
           $("#addNewValue").css('visibility', 'hidden');
+          resetFields();
         }
     });
 
@@ -47,8 +49,18 @@ $(document).ready(function(){
       }
     });
 
+    function resetFields() {
+      $('#valueSet .multi-block').each(function(index) {
+        if(index !== 0) {
+          $(this).remove();
+        }
+      });
+
+      count = 1;
+    }
+
     deleteChoice = function(el) {
-       $(el).parent().parent().fadeOut(300, function() {
+       $(el).parent().parent().parent().fadeOut(300, function() {
          $(this).remove();
          count--;
        });
