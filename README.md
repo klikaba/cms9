@@ -99,14 +99,15 @@ end
 ### Dependencies
 
 * Install ImageMagick for Dragonfly's image processing
-  * If you will use Dragonfly datastores (which are not included in core of Dragonfly) you need to include them in Gemfile: [Amazon S3](https://github.com/markevans/dragonfly-s3_data_store), [Couch](https://github.com/markevans/dragonfly-couch_data_store) or [Mongo](https://github.com/markevans/dragonfly-mongo_data_store)
+  * If you will use Dragonfly data stores (which are not included in core of Dragonfly) you need to include them in Gemfile: [Amazon S3](https://github.com/markevans/dragonfly-s3_data_store), [Couch](https://github.com/markevans/dragonfly-couch_data_store) or [Mongo](https://github.com/markevans/dragonfly-mongo_data_store)
+  * In case you need data store which is not listed, you can also build a custom data store [Building a custom data store](http://markevans.github.io/dragonfly/data-stores/#building-a-custom-data-store)
 * Make sure that Gemfile has either kaminari or will_paginate
 
 ### Dragonfly Datastores
 
-By default Dragonfly is using datastore:file. If you plan to use any other datastore, after including gem and install you need to override Dragonflys configuration.
+By default Dragonfly is using datastore:file. If you plan to use any other data store, after including gem and install you need to override Dragonflys configuration.
 
-For example if you are going to use Amazon S3 as your default datastore, you need to make initializer (e.g `config/initializers/init_dragonfly_s3.rb`)which will override configuration (one is for Dragonfly uploader, and second for Ckeditor assets uploader):
+For example if you are going to use Amazon S3 as your default data store, you need to make initializer (e.g `config/initializers/init_dragonfly_s3.rb`)which will override configuration (one for Dragonfly uploader, and second for Ckeditor assets uploader):
 
 ```ruby
 require 'dragonfly/s3_data_store'
