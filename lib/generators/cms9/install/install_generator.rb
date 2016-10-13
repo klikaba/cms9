@@ -1,9 +1,12 @@
 require "rails/generators/base"
 require 'rails/generators/migration'
+require 'rails/generators/active_record'
 
 module Cms9
   module Generators
     class InstallGenerator < Rails::Generators::Base
+      include Rails::Generators::Migration
+
       argument :def_route, type: :string, default: "cms9"
       source_root File.expand_path(File.dirname(__FILE__))
 
@@ -14,7 +17,7 @@ module Cms9
       end
 
       def copy_initializer
-        puts "Copying necessary configurations..."
+        puts "Copying necessary files..."
         copy_file 'templates/cms9_configurator.rb', 'config/initializers/cms9_configurator.rb'
       end
 
@@ -26,6 +29,22 @@ module Cms9
 
         File.open("app/assets/javascripts/ckeditor/config.js", "w") do |f|
           f.write(filtered_data)
+        end
+      end
+
+      def self.next_migration_number(dirname)
+        ActiveRecord::Generators::Base.next_migration_number(dirname)
+      end
+
+      def generate_migration
+        destination   = File.expand_path('db/migrate/cms9_create.rb', self.destination_root)
+        migration_dir = File.dirname(destination)
+        destination   = self.class.migration_exists?(migration_dir, 'cms9_create')
+
+        if destination
+          puts "\n\e[0m\e[31mFound existing cms9_create.rb migration. Remove it if you want to regenerate.\e[0m"
+        else
+          migration_template '../../../../db/migrate/cms9_create.rb', 'db/migrate/cms9_create.rb'
         end
       end
 
