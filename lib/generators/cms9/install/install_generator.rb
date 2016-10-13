@@ -44,7 +44,16 @@ module Cms9
         if destination
           puts "\n\e[0m\e[31mFound existing cms9_create.rb migration. Remove it if you want to regenerate.\e[0m"
         else
-          migration_template '../../../../db/migrate/cms9_create.rb', 'db/migrate/cms9_create.rb'
+          cms9_file_dir = File.expand_path('../../../../../db/migrate/.', __FILE__)
+          files = []
+
+          Dir.foreach(cms9_file_dir) do |file|
+            files << file unless file =~ /^\.\.?$/
+          end
+
+          files.each do |migration|
+            migration_template '../../../../db/migrate/' + migration, 'db/migrate/' + migration
+          end
         end
       end
 
