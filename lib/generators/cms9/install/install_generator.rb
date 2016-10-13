@@ -19,6 +19,7 @@ module Cms9
       def copy_initializer
         puts "Copying necessary files..."
         copy_file 'templates/cms9_configurator.rb', 'config/initializers/cms9_configurator.rb'
+        puts ""
       end
 
       def copy_ckeditor_config
@@ -61,6 +62,9 @@ module Cms9
 
       def show_info
         puts "\n  *************************************************************************"
+        puts "  *                                                                       *"
+        puts "  *     Everything is almost done. Please don\'t forget to                 *"
+        puts "  *       * run migrations -> `\033[32mrails db:migrate\033[0m`                          *"
         puts "  *                                                                       *"
         puts "  *     Some things you must do manually if you haven\'t yet               *"
         puts "  *     Visit \033[32mhttps://github.com/klikaba/cms9\033[0m for more informations       *"
