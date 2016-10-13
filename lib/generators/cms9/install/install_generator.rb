@@ -37,21 +37,23 @@ module Cms9
       end
 
       def generate_migration
-        destination   = File.expand_path('db/migrate/cms9_create.rb', self.destination_root)
-        migration_dir = File.dirname(destination)
-        destination   = self.class.migration_exists?(migration_dir, 'cms9_create')
+        cms9_file_dir = File.expand_path('../../../../../db/migrate/.', __FILE__)
+        files = []
 
-        if destination
-          puts "\n\e[0m\e[31mFound existing cms9_create.rb migration. Remove it if you want to regenerate.\e[0m"
-        else
-          cms9_file_dir = File.expand_path('../../../../../db/migrate/.', __FILE__)
-          files = []
+        Dir.foreach(cms9_file_dir) do |file|
+          files << file unless file =~ /^\.\.?$/
+        end
 
-          Dir.foreach(cms9_file_dir) do |file|
-            files << file unless file =~ /^\.\.?$/
-          end
+        files.each do |migration|
+          destination   = File.expand_path('db/migrate/' + migration, self.destination_root)
+          migration_dir = File.dirname(destination)
+          only_name     = File.basename(migration, File.extname(migration))
+          destination   = self.class.migration_exists?(migration_dir, only_name)
 
-          files.each do |migration|
+          if destination
+            puts "\n\e[0m\e[31mFound existing " + migration + " migration. Remove it if you want to regenerate.\e[0m"
+          else
+            puts ""
             migration_template '../../../../db/migrate/' + migration, 'db/migrate/' + migration
           end
         end
