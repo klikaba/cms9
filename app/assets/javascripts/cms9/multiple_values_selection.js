@@ -57,6 +57,8 @@ $(document).ready(function(){
       });
 
       count = 1;
+
+      $('#multi_values_').removeAttr('required');
     }
 
     deleteChoice = function(el) {
