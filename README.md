@@ -58,11 +58,7 @@ After creating a Post Type, you are ready to populate/create it's data. For diff
 
 ```html
 <% @Posts.each do |post| %>
-  <div class="col-md-4">
-     <div class="well">
-       <h4><%= post.title.value %></h4>
-     </div>
- </div>              
+  # TODO #           
 <% end %>
 ```
 
@@ -71,25 +67,72 @@ Once you made a simple layout, you are ready to create as many posts as you want
 
 ## Configuration
 
-Authorization can be added using the current_user method. If you pass a block it will be triggered through a before filter on every action in Cms9.
+Authorization should be added using the current_user method. If you pass a block it will be triggered through a before filter on first action in Cms9.
 
-To begin with, you may be interested in setting up [Devise](https://github.com/sferik/rails_admin/wiki/Devise) or something else.
+To begin with, you may be interested in setting up [Devise](https://github.com/sferik/rails_admin/wiki/Devise) or something similar.
 
-In `config/initializers/cms9_configurator.rb` we are passing our **current_user** method (or whatever you use to recognize user):
+After, in your User model, you need to implement method **cms9_admin?** which will be used to recognize users and give them permission to access Cms9 dashboard:
 
-#### For example:
+#### Example of User Model:
+
+```ruby
+class User < ApplicationRecord
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  def cms9_admin?
+    return true     # All users have access to Cms9 dashboard
+  end
+end
+```
+
+In `config/initializers/cms9_configurator.rb` we are passing Devise **current_user** method (or whatever you use to recognize user):
+
 ```ruby
 Cms9.configure do |config|
   config.current_user =  :current_user
 end
 ```
 
-**Note**: In Devise, **current_user** method is used by default, it will work without passing it to Cms9 configuration. Be sure, if you are using something else, to implement this method before you publish application.
+**Note**: In Devise, **current_user** method is used by default, it will work without passing it to Cms9 configuration. Be sure, if you are using something else, to pass that method.
 
 ### Dependencies
 
 * Install ImageMagick for Dragonfly's image processing
+  * If you will use Dragonfly datastores (which are not included in core of Dragonfly) you need to include them in Gemfile: [Amazon S3](https://github.com/markevans/dragonfly-s3_data_store), [Couch](https://github.com/markevans/dragonfly-couch_data_store) or [Mongo](https://github.com/markevans/dragonfly-mongo_data_store)
 * Make sure that Gemfile has either kaminari or will_paginate
+
+### Dragonfly Datastores
+
+By default Dragonfly is using datastore:file. If you plan to use any other datastore, after including gem and install you need to override Dragonflys configuration.
+
+For example if you are going to use Amazon S3 as your default datastore, you need to make initializer (e.g `config/initializers/init_dragonfly_s3.rb`)which will override configuration (one is for Dragonfly uploader, and second for Ckeditor assets uploader):
+
+```ruby
+require 'dragonfly/s3_data_store'
+
+Dragonfly.app.configure do
+  ...
+
+  datastore :s3,
+    bucket_name: 'mybucket',
+    access_key_id: 'my_access_key_id',
+    secret_access_key: 'my_secret_access_key'
+
+  ...
+end
+
+Dragonfly.app(:ckeditor).configure do
+  ...
+
+  datastore :s3,
+    bucket_name: 'mybucket',
+    access_key_id: 'my_access_key_id',
+    secret_access_key: 'my_secret_access_key'
+
+  ...
+end
+```
 
 
 
