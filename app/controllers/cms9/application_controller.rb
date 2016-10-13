@@ -21,12 +21,12 @@ module Cms9
         redirect_to '/'
       end
       @missing_implementation = current_user.instance_of?(Cms9::User)
-      Rails.logger.error '  *************************************************************************'
-      Rails.logger.error '  *                                                                       *'
-      Rails.logger.error '  *  YOUR CMS IS OPENED FOR EDITING!!!                                    *'
-      Rails.logger.error '  *  PLEASE IMPLEMENT cms9_admin? METHOD FOR current_user!                *'
-      Rails.logger.error '  *                                                                       *'
-      Rails.logger.error '  *************************************************************************'
+      Rails.logger.error "\n  *************************************************************************"
+      Rails.logger.error "  *                                                                       *"
+      Rails.logger.error "  *  \033[31mYOUR CMS IS OPENED FOR EDITING!!!\033[0m                                    *"
+      Rails.logger.error "  *  \033[31mPLEASE IMPLEMENT cms9_admin? METHOD FOR current_user!\033[0m                *"
+      Rails.logger.error "  *                                                                       *"
+      Rails.logger.error "  *************************************************************************\n"
     end
 
     private
