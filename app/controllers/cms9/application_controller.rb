@@ -7,31 +7,25 @@ module Cms9
 
     def current_user
       current_user_ident = Cms9.configuration.current_user || :current_user
+      parent = ::ApplicationController.new
+      parent.request = request
 
-      parent = parent_controller
       if parent.respond_to?(current_user_ident)
         parent.send(current_user_ident)
-      else
-        return Cms9::User.new
       end
     end
 
     def authorize
-      @missing_implementation = current_user.instance_of?(Cms9::User)
-      # TODO - Log missing implementation ...
-    end
+      unless current_user.try(:cms9_admin?)
+        Rails.logger.error "\n  *************************************************************************"
+        Rails.logger.error "  *                                                                       *"
+        Rails.logger.error "  *  \033[31mYOUR CMS IS OPENED FOR EDITING!!!\033[0m                                    *"
+        Rails.logger.error "  *  \033[31mPLEASE IMPLEMENT cms9_admin? METHOD FOR current_user!\033[0m                *"
+        Rails.logger.error "  *                                                                       *"
+        Rails.logger.error "  *************************************************************************\n"
 
-    private
-      def parent_controller
-        controller = ::ApplicationController.new
-        controller.request = request
+        redirect_to '/'
       end
-  end
-
-  class User
-    def cms9_admin?
-      return false
     end
   end
-
 end

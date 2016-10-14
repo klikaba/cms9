@@ -1,13 +1,24 @@
-<div class="multi-block col-md-12" style="padding: 0;">
-  <div class="col-md-10" style="padding: 0;">
-    <% if edit %>
-      <% @field.metadata.split(',').each do |input| %>
-        <% if !input.blank? %>
-          <%= text_field_tag 'multi_values[]', input, { class: 'form-control multi-pick', style: 'margin-bottom: 10px;', pattern: '^[\w ]+$', required: true } %>
-        <% end %>
-      <% end %>
-    <% else %>
-      <%= text_field_tag 'multi_values[]', nil, { class: 'form-control multi-pick', style: 'margin-bottom: 10px;', pattern: '^[\w ]+$', required: true } %>
+<% if edit && ( @field.field_type == 'select_single' || @field.field_type == 'select_multiple' ) %>
+  <% @field.metadata.split(',').each do |input| %>
+    <% if !input.blank? %>
+      <div class="multi-block col-md-12" style="padding: 0;">
+        <div class="col-md-10 input-group" style="padding: 0; margin-bottom: 10px;">
+          <%= text_field_tag 'multi_values[]', input, { class: 'form-control multi-pick', pattern: '^[\w ]+$', required: true } %>
+          <% if !(@field.metadata.split(',').first == input) %>
+          <div class="input-group-btn">
+            <a href="javascript:;" onclick="deleteChoice(this)" class="btn btn-danger btn-delete-choice">
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </a>
+          </div>
+          <% end %>
+        </div>
+      </div>
     <% end %>
+  <% end %>
+<% else %>
+  <div class="multi-block col-md-12" style="padding: 0;">
+    <div class="col-md-10" style="padding: 0; margin-bottom: 10px;">
+      <%= text_field_tag 'multi_values[]', nil, { class: 'form-control multi-pick', pattern: '^[\w ]+$', required: false } %>
+    </div>
   </div>
-</div>
+<% end %>

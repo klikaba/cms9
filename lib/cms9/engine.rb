@@ -15,10 +15,8 @@ module Cms9
 
     require 'kaminari'
 
-    initializer :append_migrations do |app|
-      app.class.configure do
-        config.paths['db/migrate'] = Cms9::Engine.paths['db/migrate'].existent
-      end
+    config.to_prepare do
+      ::ApplicationController.helper(Cms9::ApplicationHelper)
     end
 
   end
