@@ -11,9 +11,9 @@ module Cms9
         when 'select_multiple'
           return self.value.split(',')
         when 'image'
-          return self.image.url
+          return !self.image_uid.blank? ? self.image.url : ''
         else
-          return '<nil>'
+          return ''
       end
     end
   end
