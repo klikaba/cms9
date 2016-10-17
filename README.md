@@ -1,28 +1,37 @@
 # Cms9
 
-Small CMS Admin module for Rails.
-[Try the demo][demo].
+Small CMS Admin module for developers.
+
 
 ## What Is Cms9?
 
-Cms9 is a library for Rails apps
-that automatically generates cms dashboard.
-Cms9's dashboard give non-technical users clean interfaces
-that allow them to create, edit, search, and delete definitions,
-field types and posts related to it.
+Cms9 is not standard CMS - it is targeted for developers to ease process of embedding CMS functionality to any site.
 
-Cms9 provides a better user experience and it's easy for developers to customize.
+Cms9 provides admin dashboard where user can:
+* Define different types of forms (News, BlogPost, Ads, Jobs, ...)
+* Adding user defined fields to forms
+* Currently we are supporting following field types
+  * Text field
+  * Text Area (WYSIWYG-ed text area using ckedit)
+  * Number
+  * Choose Single
+  * Choose Multiple
+  * Date
+  * Time
+  * Date & Time
+  * Image
+* Manage data for each form
+
+Cms9 does not have any functionality regarding displaying content - it is firstly there to provide Admin dashboard where data can be defined and managed. On the other side it exposes simple interface to access that data.
 
 ### Features
-* Simple integration with Rails 5 apps
-* Custom actions
+* Rails 5+ 
 * Automatic form validation
-* Authentication customizable (via [Devise](https://github.com/plataformatec/devise) or other)
-* Supported ORM ActiveRecord
+* Authentication customizable (via [Devise](https://github.com/plataformatec/devise) or similar frameworks)
 * [Dragonfly](https://github.com/markevans/dragonfly) for handling images and other attachments
 * [Ckeditor](https://github.com/galetahub/ckeditor) as default WYSIWYG text editor
 * Bootstrap 3+ with Admin LTE template
-  * Can be used or extended for wider usage
+
 
 ## Getting Started
 
@@ -33,11 +42,12 @@ Add Cms9 to your Gemfile:
 gem "cms9"
 ```
 
-Re-bundle, then run the installer:
+Run the installer:
 
 ```bash
 $ rails generate cms9:install [DEF_ROUTE]
 ```
+
 Where [DEF_ROUTE] is optional and presents where your Cms9 route will be mounted, by default it's /cms9
 
 Install generator will mount Cms9 route, add current_user configurator initializer and additional configuration for Ckeditor.
@@ -48,30 +58,67 @@ Then run:
 $ rails db:migrate
 ```
 
-Restart your server, and visit http://localhost:3000/cms9 (or where you defined Cms9 to be mounted)
-to see your new Cms9 dashboard in action.
+Open http://localhost:3000/cms9 to see your new Cms9 dashboard in action.
 
+## Managing Content
+Content is managed by creating Post Types (aka Post Definitions). Post Type represents form for specific data - in case of news site it can be *News Form* that have multiple fields for *Title*, *Content*, *CoverImage*, *PublishedStatus*. Each of those fields can be created from Dashboard.
 
-When your Cms9 is up and running, before creating posts and populating them with content we need to create a Post Types. Post Types is defined by fields and its types.
+Once Post Type with specific name is created and all fields are added CMS9 Admin can start creating data (Posts) based on those Post Types. 
 
-After creating a Post Type, you are ready to populate/create it's data. For different field types you will get different input methods, for easier input handling. Once when it's stored, it's available to be showed in your application, for example:
+Cms9 doesn't have any functionality to display content but exposes simple interface to retrieving data. E.g inside News app you can access all Posts with:
 
 ```html
-<% @Posts.each do |post| %>
-  # TODO #           
+<% @Cms9::Post.each do |post| %>
+  <%= post.field('Title) %>
 <% end %>
 ```
 
-You can make any kind of layout for your posts and showed them however you want.
-Once you made a simple layout, you are ready to create as many posts as you want. It's that easy.
+You can make any kind of layout for your posts and showed them however you want. Once you made a simple layout, you are ready to create as many posts as you want. It's that easy.
+
+
+## Data Interface
+All Data Interface classes are ActveRecord models.
+
+**Cms9::PostDefinition** - Represents Form Defintion e.g. News, Jobs, Ads, 
+**Cms9::PostField** - each PostDefinition contains multiple fields that describes type of data
+**Cms9::Post** - Represents post with data. Each Post belongs to one of PostDefinitions
+**Cms9::Field** - Represents value for each field and belongs to Post
+
+
+#### Cms9::PostDefinition
+Methods:
+fields() - returns list of fields that defines PostDefinition
+field(name) - returns field by name
+
+E.g. If user Created PostDefinition called 'News' with Title and Content fields we can retrieve it by:
+
+Cms9::PostDefinition.all - returns all post definitions
+Cms9::PostDefinition.all.first.fields() - returns all fields for this Post Type
+Cms9::PostDefinition.all.first.field('Title') - returns field that describes field named 'Title'
+
+#### Cms9::PostFields
+Class represents definition of Post Type field. Each class have 'name' (unique in context of one PostDefintion), 'Type' and extra parameters depending on type. Currently we are supporting following types: Text field, Text Area (WYSIWYG-ed text area using ckedit), Number, Choose Single, Choose Multiple, Date, Time, Date & Time, Image.
+
+#### Cms9::Post
+field(name) - Returns Cms9::Field by name
+
+#### Cms9::Field
+Represents value for particular field. Depending on the PostField type 'value' column is serialized differently. 
+
+Following helpers can be applied to Cms9::Field for easier data extraction/displaying:
+
+cms9\_field(field)
 
 ## Configuration
 
-Authorization should be added using the current_user method. If you pass a block it will be triggered through a before filter on first action in Cms9.
+Authorization should be added using the current_user method. If you pass a block it will be triggered through a 
+before filter on first action in Cms9.
 
-To begin with, you may be interested in setting up [Devise](https://github.com/sferik/rails_admin/wiki/Devise) or something similar.
+To begin with, you may be interested in setting up [Devise](https://github.com/sferik/rails_admin/wiki/Devise) or 
+something similar.
 
-After, in your User model, you need to implement method **cms9_admin?** which will be used to recognize users and give them permission to access Cms9 dashboard:
+After, in your User model, you need to implement method **cms9_admin?** which will be used to recognize users and 
+give them permission to access Cms9 dashboard:
 
 #### Example of User Model:
 
@@ -86,7 +133,8 @@ class User < ApplicationRecord
 end
 ```
 
-In `config/initializers/cms9_configurator.rb` we are passing Devise **current_user** method (or whatever you use to recognize user):
+In `config/initializers/cms9_configurator.rb` we are passing Devise **current_user** method (or whatever you use 
+to recognize user):
 
 ```ruby
 Cms9.configure do |config|
@@ -94,7 +142,8 @@ Cms9.configure do |config|
 end
 ```
 
-**Note**: In Devise, **current_user** method is used by default, it will work without passing it to Cms9 configuration. Be sure, if you are using something else, to pass that method.
+**Note**: In Devise, **current_user** method is used by default, it will work without passing it to Cms9 
+configuration. Be sure, if you are using something else, to pass that method.
 
 ### Dependencies
 
@@ -105,21 +154,21 @@ end
 
 ### Dragonfly data stores
 
-By default Dragonfly is using datastore:file. If you plan to use any other data store, after including gem and install you need to override Dragonflys configuration.
+By default Dragonfly is using datastore:file. If you plan to use any other data store, after including gem and 
+install you need to override Dragonflys configuration.
 
-For example if you are going to use Amazon S3 as your default data store, you need to make initializer (e.g `config/initializers/init_dragonfly_s3.rb`)which will override configuration (one for Dragonfly uploader, and second for Ckeditor assets uploader):
+For example if you are going to use Amazon S3 as your default data store, you need to make initializer 
+(e.g `config/initializers/init_dragonfly_s3.rb`)which will override configuration (one for Dragonfly uploader, and second for Ckeditor assets uploader):
 
 ```ruby
 require 'dragonfly/s3_data_store'
 
 Dragonfly.app.configure do
   ...
-
   datastore :s3,
     bucket_name: 'mybucket',
     access_key_id: 'my_access_key_id',
     secret_access_key: 'my_secret_access_key'
-
   ...
 end
 
@@ -135,10 +184,5 @@ Dragonfly.app(:ckeditor).configure do
 end
 ```
 
-
-
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-
-[demo]: #

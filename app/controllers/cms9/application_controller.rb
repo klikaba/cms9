@@ -17,14 +17,7 @@ module Cms9
 
     def authorize
       unless current_user.try(:cms9_admin?)
-        Rails.logger.error "\n  *************************************************************************"
-        Rails.logger.error "  *                                                                       *"
-        Rails.logger.error "  *  \033[31mYOUR CMS IS OPENED FOR EDITING!!!\033[0m                                    *"
-        Rails.logger.error "  *  \033[31mPLEASE IMPLEMENT cms9_admin? METHOD FOR current_user!\033[0m                *"
-        Rails.logger.error "  *                                                                       *"
-        Rails.logger.error "  *************************************************************************\n"
-
-        redirect_to '/'
+        raise 'Implement cms9_admin? method in current_user context. See https://github.com/klikaba/cms9'
       end
     end
   end
