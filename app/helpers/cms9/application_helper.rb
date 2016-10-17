@@ -15,8 +15,6 @@ module Cms9
           else
             return '<unsupported type>'
         end
-      else
-        return '<unsupported type>'
       end
     end   
    
