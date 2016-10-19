@@ -1,7 +1,7 @@
 module Cms9
   class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
-    helper_method :current_user
+    helper_method :current_user, :user_logout
 
     before_action :authorize
 
@@ -12,6 +12,16 @@ module Cms9
 
       if parent.respond_to?(current_user_ident)
         parent.send(current_user_ident)
+      end
+    end
+
+    def user_logout
+      logout_ident = Cms9.configuration.destroy_user_session || :destroy_user_session
+      parent = ::ApplicationController.new
+      parent.request = request
+
+      if parent.respond_to?(logout_ident)
+        parent.send(logout_ident)
       end
     end
 
