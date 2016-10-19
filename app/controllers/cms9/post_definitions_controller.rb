@@ -25,6 +25,8 @@ module Cms9
             'post_definition_id': @post.id
           })
           if @field.save
+            Cms9Events.new.create_event('post_definition', @post.id, params[:action], current_user, nil)
+
             redirect_to edit_post_definition_path(@post.id)
           end
         else
@@ -40,11 +42,14 @@ module Cms9
 
     def update
       @post = PostDefinition.find(params[:id])
+      field = PostDefinition.where(name: params[:post_definition][:name].downcase)
 
-      if PostDefinition.where(name: @post[:name]).blank?
+      if field.blank? || @post.name == params[:post_definition][:name]
 
         if @post.update(post_definition_params)
-          redirect_to post_definitions_path
+          Cms9Events.new.create_event('post_definition', @post.id, params[:action], current_user, nil)
+
+          redirect_to edit_post_definition_path(@post.id)
         else
           render :edit
         end
@@ -58,6 +63,8 @@ module Cms9
     def destroy
       @post_def = PostDefinition.find(params[:id])
       @post_def.destroy
+
+      Cms9Events.new.create_event('post_definition', @post_def.id, params[:action], current_user, @post_def.name)
 
       @posts = Post.where(post_definition_id: params[:id])
       @posts.destroy_all

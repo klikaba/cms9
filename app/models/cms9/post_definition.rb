@@ -1,6 +1,6 @@
 module Cms9
   class PostDefinition < ApplicationRecord
-    validates :name, presence: true,
+    validates :name, presence: true, uniqueness: { case_sensitive: false },
               length: { minimum: 3 }
 
     has_many :post_fields, dependent: :destroy
@@ -12,7 +12,7 @@ module Cms9
         @cache_fields = self.post_fields.map { |field| [field.name, field] }.to_h
       end
 
-      @cache_fields.values      
+      @cache_fields.values
     end
 
     # Get field by name

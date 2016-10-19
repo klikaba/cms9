@@ -8,6 +8,7 @@ require 'rails-assets-tether'
 require 'font-awesome-rails'
 require 'ckeditor'
 require 'cms9'
+require "events/cms9_events"
 
 module Cms9
   class Engine < ::Rails::Engine
