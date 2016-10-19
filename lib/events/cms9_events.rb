@@ -39,8 +39,12 @@ module Cms9
       return @post = Cms9::Field.where(post_id: post_id)[0]
     end
 
-    def timeline_events
-      Event.order('created_at desc').limit(20)
+    def timeline_events(limit)
+      if limit != 'all'
+        Event.order('created_at desc').limit(limit)
+      else
+        Event.order('created_at desc')
+      end
     end
   end
 end

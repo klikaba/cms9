@@ -18,6 +18,20 @@
               <span class="bg-blue">
                 Last 20 events
               </span>
+              <div class="btn-group" style="float: right;">
+                <%= link_to root_path(limit: '10'), class: 'btn btn-primary btn-xs' do %>
+                  <span>10</span>
+                <% end %>
+                <%= link_to root_path(limit: '20'), class: 'btn btn-primary btn-xs' do %>
+                  <span>20</span>
+                <% end %>
+                <%= link_to root_path(limit: '50'), class: 'btn btn-primary btn-xs' do %>
+                  <span>50</span>
+                <% end %>
+                <%= link_to root_path(limit: 'all'), class: 'btn btn-danger btn-xs' do %>
+                  <span>All</span>
+                <% end %>
+              </div>
             </li>
 
             <% @events.each do |event| %>
