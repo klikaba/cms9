@@ -16,7 +16,11 @@
         <ul class="timeline" style="margin-top: 50px;">
             <li class="time-label">
               <span class="bg-blue">
-                Last 20 events
+                <% if params[:limit] == 'all' %>
+                  All events
+                <% else %>
+                  Last <%= params[:limit] ? params[:limit] : 10 %> events
+                <% end %>
               </span>
               <div class="btn-group" style="float: right;">
                 <%= link_to root_path(limit: '10'), class: 'btn btn-primary btn-xs' do %>
