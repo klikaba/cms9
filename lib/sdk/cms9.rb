@@ -1,5 +1,5 @@
 # module Cms9
-  
+
 #   class Cms9Decorator
 #     def initialize(model)
 #       @db_model = model
@@ -21,7 +21,7 @@
 #       @db_model.updated_at
 #     end
 #   end
-  
+
 #   class FieldDefinitionModel < Cms9Decorator
 #     def name
 #       @db_model.name
@@ -102,7 +102,7 @@
 
 #   end
 
-  
+
 #   class PostModel < Cms9Decorator
 #     def initialize(post, post_definition_model)
 #       @cache_fields = nil
@@ -110,7 +110,7 @@
 #       super(post)
 #     end
 
-#     def fields() 
+#     def fields()
 #         # TODO - Make it more clear
 #         @cache_fields ||=  model.fields
 #                                 .joins(:post_field).includes(:post_field)
@@ -129,10 +129,10 @@
 #       PostModel.new(Cms9::Post.find(id))
 #     end
 
-#     def self.all() 
+#     def self.all()
 #       Cms9::Post.include(fields: :post_fields).all.map { |model| PostModel.new(model) }
 #     end
 #   end
-  
+
 
 # end

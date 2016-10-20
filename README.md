@@ -25,8 +25,9 @@ Cms9 provides admin dashboard where user can:
 Cms9 does not have any functionality regarding displaying content - it is firstly there to provide Admin dashboard where data can be defined and managed. On the other side it exposes simple interface to access that data.
 
 ### Features
-* Rails 5+ 
+* Rails 5+
 * Automatic form validation
+* Events history (record actions like create/update/delete on Post Types and their Posts)
 * Authentication customizable (via [Devise](https://github.com/plataformatec/devise) or similar frameworks)
 * [Dragonfly](https://github.com/markevans/dragonfly) for handling images and other attachments
 * [Ckeditor](https://github.com/galetahub/ckeditor) as default WYSIWYG text editor
@@ -63,7 +64,7 @@ Open http://localhost:3000/cms9 to see your new Cms9 dashboard in action.
 ## Managing Content
 Content is managed by creating Post Types (aka Post Definitions). Post Type represents form for specific data - in case of news site it can be *News Form* that have multiple fields for *Title*, *Content*, *CoverImage*, *PublishedStatus*. Each of those fields can be created from Dashboard.
 
-Once Post Type with specific name is created and all fields are added CMS9 Admin can start creating data (Posts) based on those Post Types. 
+Once Post Type with specific name is created and all fields are added CMS9 Admin can start creating data (Posts) based on those Post Types.
 
 Cms9 doesn't have any functionality to display content but exposes simple interface to retrieving data. E.g inside News app you can access all Posts with:
 
@@ -79,7 +80,7 @@ You can make any kind of layout for your posts and showed them however you want.
 ## Data Interface
 All Data Interface classes are ActveRecord models.
 
-**Cms9::PostDefinition** - Represents Form Defintion e.g. News, Jobs, Ads, 
+**Cms9::PostDefinition** - Represents Form Defintion e.g. News, Jobs, Ads,
 **Cms9::PostField** - each PostDefinition contains multiple fields that describes type of data
 **Cms9::Post** - Represents post with data. Each Post belongs to one of PostDefinitions
 **Cms9::Field** - Represents value for each field and belongs to Post
@@ -103,7 +104,7 @@ Class represents definition of Post Type field. Each class have 'name' (unique i
 field(name) - Returns Cms9::Field by name
 
 #### Cms9::Field
-Represents value for particular field. Depending on the PostField type 'value' column is serialized differently. 
+Represents value for particular field. Depending on the PostField type 'value' column is serialized differently.
 
 Following helpers can be applied to Cms9::Field for easier data extraction/displaying:
 
@@ -111,13 +112,13 @@ cms9\_field(field)
 
 ## Configuration
 
-Authorization should be added using the current_user method. If you pass a block it will be triggered through a 
+Authorization should be added using the current_user method. If you pass a block it will be triggered through a
 before filter on first action in Cms9.
 
-To begin with, you may be interested in setting up [Devise](https://github.com/sferik/rails_admin/wiki/Devise) or 
+To begin with, you may be interested in setting up [Devise](https://github.com/sferik/rails_admin/wiki/Devise) or
 something similar.
 
-After, in your User model, you need to implement method **cms9_admin?** which will be used to recognize users and 
+After, in your User model, you need to implement method **cms9_admin?** which will be used to recognize users and
 give them permission to access Cms9 dashboard:
 
 #### Example of User Model:
@@ -133,31 +134,31 @@ class User < ApplicationRecord
 end
 ```
 
-In `config/initializers/cms9_configurator.rb` we are passing Devise **current_user** method (or whatever you use 
-to recognize user):
+In `config/initializers/cms9_configurator.rb` we are passing Devise **current_user** method (or whatever you use
+to recognize user) and **destroy_user_session_path** which is default path for deleting users session (logout):
 
 ```ruby
 Cms9.configure do |config|
   config.current_user =  :current_user
+  config.destroy_user_session =  :destroy_user_session_path
 end
 ```
 
-**Note**: In Devise, **current_user** method is used by default, it will work without passing it to Cms9 
-configuration. Be sure, if you are using something else, to pass that method.
+**Note**: In Devise, **current_user** method and **destroy_user_session_path** are used by default, it will work without passing it to Cms9
+configuration. Be sure, if you are using something else, to pass that method and path.
 
 ### Dependencies
 
 * Install ImageMagick for Dragonfly's image processing
   * If you will use Dragonfly data stores (which are not included in core of Dragonfly) you need to include them in Gemfile: [Amazon S3](https://github.com/markevans/dragonfly-s3_data_store), [Couch](https://github.com/markevans/dragonfly-couch_data_store) or [Mongo](https://github.com/markevans/dragonfly-mongo_data_store)
   * In case you need data store which is not listed, you can also build a custom data store - [Building a custom data store](http://markevans.github.io/dragonfly/data-stores/#building-a-custom-data-store)
-* Make sure that Gemfile has either kaminari or will_paginate
 
 ### Dragonfly data stores
 
-By default Dragonfly is using datastore:file. If you plan to use any other data store, after including gem and 
+By default Dragonfly is using datastore:file. If you plan to use any other data store, after including gem and
 install you need to override Dragonflys configuration.
 
-For example if you are going to use Amazon S3 as your default data store, you need to make initializer 
+For example if you are going to use Amazon S3 as your default data store, you need to make initializer
 (e.g `config/initializers/init_dragonfly_s3.rb`)which will override configuration (one for Dragonfly uploader, and second for Ckeditor assets uploader):
 
 ```ruby

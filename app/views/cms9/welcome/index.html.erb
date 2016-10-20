@@ -9,11 +9,49 @@
       <div class="box-body">
         <h3>Welcome to CMS9 dashboard.</h3>
         <p>We've assembled some links to get you started:</p>
-
         <ul>
           <li><%= link_to 'Crate your first post type', post_definitions_path %></li>
         </ul>
+
+        <ul class="timeline" style="margin-top: 50px;">
+            <li class="time-label">
+              <span class="bg-blue">
+                <% if params[:limit] == 'all' %>
+                  All events
+                <% else %>
+                  Last <%= params[:limit] ? params[:limit] : 10 %> events
+                <% end %>
+              </span>
+              <div class="btn-group" style="float: right;">
+                <%= link_to root_path(limit: '10'), class: 'btn btn-primary btn-xs' do %>
+                  <span>10</span>
+                <% end %>
+                <%= link_to root_path(limit: '20'), class: 'btn btn-primary btn-xs' do %>
+                  <span>20</span>
+                <% end %>
+                <%= link_to root_path(limit: '50'), class: 'btn btn-primary btn-xs' do %>
+                  <span>50</span>
+                <% end %>
+                <%= link_to root_path(limit: 'all'), class: 'btn btn-danger btn-xs' do %>
+                  <span>All</span>
+                <% end %>
+              </div>
+            </li>
+
+            <% @events.each do |event| %>
+              <% if event.post_definition_id %>
+                <%= render 'post_definition', event: event %>
+              <% elsif event.post_id %>
+                <%= render 'post', event: event %>
+              <% elsif event.post_field_id %>
+              <% end %>
+            <% end %>
+
+            <li>
+              <i class="fa fa-clock-o bg-gray"></i>
+            </li>
+          </ul>
       </div>
     </div>
   </div>
-</div>  
+</div>

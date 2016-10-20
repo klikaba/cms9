@@ -12,10 +12,11 @@ module Cms9
   end
 
   class Configuration
-    attr_accessor :current_user
+    attr_accessor :current_user, :destroy_user_session
 
     def initialize
       @current_user = false
+      @destroy_user_session = false
     end
   end
 end

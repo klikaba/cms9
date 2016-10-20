@@ -27,6 +27,7 @@ module Cms9
         end
 
         if @field.save
+          Cms9Events.new.create_event('post_definition', @field[:post_definition_id], 'update', current_user, nil)
           redirect_to edit_post_definition_path(id: @field.post_definition_id)
         else
           render :new
@@ -76,6 +77,7 @@ module Cms9
         end
 
         if @field.update(post_field_params)
+          Cms9Events.new.create_event('post_definition', @field[:post_definition_id], 'update', current_user, nil)
           redirect_to edit_post_definition_path(id: @field.post_definition_id)
         else
           render :edit
@@ -89,6 +91,8 @@ module Cms9
     def destroy
       @field = PostField.find(params[:id])
       @field.destroy
+
+      Cms9Events.new.create_event('post_definition', @field[:post_definition_id], 'update', current_user, nil)
 
       redirect_to request.referrer
     end
