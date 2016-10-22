@@ -1,3 +1,5 @@
+![Cms9 Logo](https://raw.githubusercontent.com/klikaba/cms9/master/app/assets/images/cms9/cms9_logo_readme.png)
+
 # Cms9
 
 Small CMS Admin module for developers.
