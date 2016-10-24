@@ -4,6 +4,7 @@
 
 Small CMS Admin module for developers.
 
+[Demo Application](https://github.com/klikaba/cms9-demo) running on Cms9.
 
 ## What Is Cms9?
 
