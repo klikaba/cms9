@@ -20,6 +20,8 @@ module Cms9
     def create
       @post = Post.new(post_params)
 
+      @post.user_id = current_user.id
+
       if @post.save
         Cms9Events.new.create_event('post', @post.id, params[:action], current_user, nil)
         redirect_to posts_path(post_definition_id: @post.post_definition.id)
@@ -40,6 +42,8 @@ module Cms9
 
     def update
       @post = Post.find(params[:id])
+
+      @post.user_id = current_user.id
 
       if @post.update(post_params)
         Cms9Events.new.create_event('post', @post.id, params[:action], current_user, nil)

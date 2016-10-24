@@ -15,6 +15,8 @@ module Cms9
     def create
       @post = PostDefinition.new(post_definition_params)
 
+      @post.user_id = current_user.id
+
       if PostDefinition.where(name: @post[:name]).blank?
 
         if @post.save
@@ -22,7 +24,8 @@ module Cms9
             'name': 'Title',
             'field_type': 'text',
             'required': true,
-            'post_definition_id': @post.id
+            'post_definition_id': @post.id,
+            'user_id': current_user.id
           })
           if @field.save
             Cms9Events.new.create_event('post_definition', @post.id, params[:action], current_user, nil)
@@ -42,6 +45,8 @@ module Cms9
 
     def update
       @post = PostDefinition.find(params[:id])
+      @post.user_id = current_user.id
+
       field = PostDefinition.where(name: params[:post_definition][:name].downcase)
 
       if field.blank? || @post.name == params[:post_definition][:name]

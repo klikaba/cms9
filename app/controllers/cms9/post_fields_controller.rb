@@ -7,6 +7,7 @@ module Cms9
 
     def create
       @field = PostField.new(post_field_params)
+      @field.user_id = current_user.id
 
       if PostField.where(name: @field[:name], post_definition_id: @field[:post_definition_id]).blank?
         if @field[:field_type] == 'select_single' || @field[:field_type] == 'select_multiple'
@@ -53,6 +54,8 @@ module Cms9
 
     def update
       @field = PostField.find(params[:id])
+      @field.user_id = current_user.id
+      
       field = PostField.where(name: post_field_params[:name], post_definition_id: @field[:post_definition_id])
 
       if field.blank? || field.pluck(:id)[0].to_s == params[:id]
