@@ -1,14 +1,12 @@
 $:.push File.expand_path("../lib", __FILE__)
 
-# Maintain your gem's version:
 require "cms9/version"
 
-# Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "cms9"
   s.version     = Cms9::VERSION
-  s.authors     = ["SamirHodzic"]
-  s.email       = ["samir.hodzic@klika.ba"]
+  s.authors     = ["Klika.ba"]
+  s.email       = ["contact@klika.ba"]
   s.homepage    = "http://www.klika.ba"
   s.summary     = "Cms9"
   s.description = "Small CMS Admin module for Rails"
