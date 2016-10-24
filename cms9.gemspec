@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Cms9::VERSION
   s.authors     = ["Klika.ba"]
   s.email       = ["contact@klika.ba"]
-  s.homepage    = "http://www.klika.ba"
+  s.homepage    = "https://github.com/klikaba/cms9"
   s.summary     = "Cms9"
   s.description = "Small CMS Admin module for Rails"
   s.license     = "MIT"
