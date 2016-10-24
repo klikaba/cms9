@@ -7,6 +7,7 @@ module Cms9
 
     def create
       @field = PostField.new(post_field_params)
+      @field.user_id = current_user.id
 
       if PostField.where(name: @field[:name], post_definition_id: @field[:post_definition_id]).blank?
         if @field[:field_type] == 'select_single' || @field[:field_type] == 'select_multiple'
@@ -27,6 +28,7 @@ module Cms9
         end
 
         if @field.save
+          Cms9Events.new.create_event('post_definition', @field[:post_definition_id], 'update', current_user, nil)
           redirect_to edit_post_definition_path(id: @field.post_definition_id)
         else
           render :new
@@ -52,6 +54,8 @@ module Cms9
 
     def update
       @field = PostField.find(params[:id])
+      @field.user_id = current_user.id
+      
       field = PostField.where(name: post_field_params[:name], post_definition_id: @field[:post_definition_id])
 
       if field.blank? || field.pluck(:id)[0].to_s == params[:id]
@@ -76,6 +80,7 @@ module Cms9
         end
 
         if @field.update(post_field_params)
+          Cms9Events.new.create_event('post_definition', @field[:post_definition_id], 'update', current_user, nil)
           redirect_to edit_post_definition_path(id: @field.post_definition_id)
         else
           render :edit
@@ -89,6 +94,8 @@ module Cms9
     def destroy
       @field = PostField.find(params[:id])
       @field.destroy
+
+      Cms9Events.new.create_event('post_definition', @field[:post_definition_id], 'update', current_user, nil)
 
       redirect_to request.referrer
     end

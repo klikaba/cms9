@@ -1,0 +1,46 @@
+<li>
+  <% if event.action == 'create' %>
+    <i class="fa fa-file fa-inverse bg-green"></i>
+  <% elsif event.action == 'update' %>
+    <i class="fa fa-file fa-inverse bg-blue"></i>
+  <% else %>
+    <i class="fa fa-file fa-inverse bg-red"></i>
+  <% end %>
+  <div class="timeline-item">
+    <span class="time">
+      <i class="fa fa-clock-o"></i>
+      <%= distance_of_time_in_words_to_now(event.created_at) %>
+    </span>
+    <h3 class="timeline-header">
+      <span>
+        <% if event.action == 'destroy' %>
+          Deleted post
+        <% else %>
+          <%= event.action.capitalize %>d post
+        <% end %>
+      </span>
+
+      <% if event.deleted_field %>
+        <b><%= event.deleted_field %></b>
+      <% else %>
+        <%= link_to edit_post_path(id: event.post_id) do %>
+          <%= Cms9::Cms9Events.new.get_title_value_for_post(event.post_id) %>
+        <% end %>
+
+        <span>
+          in post type
+        </span>
+
+        <%= link_to edit_post_definition_path(id: Cms9::Post.find(event.post_id).post_definition.id) do %>
+          <%= Cms9::Post.find(event.post_id).post_definition.name %>
+        <% end %>
+
+      <% end %>
+    </h3>
+    <div class="timeline-body">
+      <span class="user-block-name">
+        <%= JSON.parse(event.user)[1] ? JSON.parse(event.user)[1] : "User #" + JSON.parse(event.user)[0].to_s %>
+      </span>
+    </div>
+  </div>
+</li>

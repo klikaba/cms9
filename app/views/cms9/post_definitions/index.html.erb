@@ -4,7 +4,7 @@
       <div class="box-header">
         <i class="fa fa-folder"></i>
         <h3 class="box-title">Post Types</h3>
-        
+
         <div class="pull-right box-tools">
           <%= link_to 'New Post Type', new_post_definition_path, class: 'btn btn-primary' %>
         </div>
@@ -16,6 +16,7 @@
               <th>Name</th>
               <th style="width:20px;">Count</th>
               <th style="width:120px;">Created</th>
+              <th style="width:120px;">Last Update</th>
               <th style="width:140px;">Actions</th>
             </tr>
           </thead>
@@ -26,6 +27,7 @@
                 <td><%= post.name %></td>
                 <td><%= Cms9::Post.where(post_definition: post).count %></td>
                 <td><%= distance_of_time_in_words_to_now(post.created_at) %></td>
+                <td>User #<%= post.user_id %></td>
                 <td>
                   <%= link_to "Edit", edit_post_definition_path(post),
                                 class: 'btn btn-primary btn-sm'%>
@@ -43,6 +45,4 @@
       </div>
     </div>
   </div>
-</div>  
-
-
+</div>

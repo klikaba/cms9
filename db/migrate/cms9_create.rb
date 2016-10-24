@@ -2,6 +2,7 @@ class Cms9Create < ActiveRecord::Migration[5.0]
   def self.up
     create_table :cms9_post_definitions do |t|
       t.string :name
+      t.string :user_id
       t.timestamps
     end
 # --------------------------------------------------------
@@ -11,11 +12,13 @@ class Cms9Create < ActiveRecord::Migration[5.0]
       t.string :field_type
       t.boolean :required, null: false, default: false
       t.string :metadata
+      t.string :user_id
       t.timestamps
     end
 # --------------------------------------------------------
     create_table :cms9_posts do |t|
       t.references :post_definition, foreign_key: true
+      t.string :user_id
       t.timestamps
     end
 # --------------------------------------------------------
@@ -26,6 +29,16 @@ class Cms9Create < ActiveRecord::Migration[5.0]
       t.text :image
       t.string :image_uid
       t.string :image_name
+      t.string :user_id
+      t.timestamps
+    end
+# --------------------------------------------------------
+    create_table :cms9_events do |t|
+      t.belongs_to :post, index: true
+      t.belongs_to :post_definition, index: true
+      t.text :user
+      t.string :action
+      t.string :deleted_field
       t.timestamps
     end
 # --------------------------------------------------------
@@ -54,6 +67,7 @@ class Cms9Create < ActiveRecord::Migration[5.0]
     drop_table :cms9_post_fields
     drop_table :cms9_posts
     drop_table :cms9_fields
+    drop_table :cms9_events
     drop_table :ckeditor_assets
   end
 end
