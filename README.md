@@ -2,6 +2,8 @@
 
 # Cms9
 
+[![Gem Version](https://badge.fury.io/rb/cms9.svg)](https://badge.fury.io/rb/cms9)
+
 Small CMS Admin module for developers.
 
 [Demo Application](https://github.com/klikaba/cms9-demo) running on Cms9.
