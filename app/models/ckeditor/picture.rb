@@ -1,7 +1,13 @@
 module Cms9
+  # ckeditor picture model
   class Ckeditor::Picture < Ckeditor::Asset
-    validates_property :format, of: :data, in: image_file_types unless image_file_types.empty?
-    validates_property :image?, of: :data, as: true, message: :invalid
+    validates_property :format,
+                       of: :data,
+                       in: image_file_types unless image_file_types.empty?
+    validates_property :image?,
+                       of: :data,
+                       as: true,
+                       message: :invalid
 
     def url_content
       data.thumb('800x800>').url

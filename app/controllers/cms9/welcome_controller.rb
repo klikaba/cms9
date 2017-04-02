@@ -1,4 +1,5 @@
 module Cms9
+  # welcome controller
   class WelcomeController < Cms9::ApplicationController
     def index
       limit = params[:limit] ? params[:limit] : 10

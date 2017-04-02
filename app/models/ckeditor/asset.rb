@@ -1,4 +1,5 @@
 module Cms9
+  # ckeditor main model
   class Ckeditor::Asset < ActiveRecord::Base
     include Ckeditor::Orm::ActiveRecord::AssetBase
     include Ckeditor::Backend::Dragonfly

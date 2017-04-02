@@ -1,0 +1,11 @@
+AllCops:
+  Exclude:
+    - '.git-hooks/**/*'
+    - 'bin/*'
+    - 'db/**/*'
+    - 'vendor/bundle/**/*'
+    - 'cms9.gemspec'
+    - 'Rakefile'
+    - 'test/**/*'
+    - 'lib/sdk/cms9.rb'
+    - 'app/models/ckeditor/*.rb'

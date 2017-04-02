@@ -1,42 +1,23 @@
 module Cms9
+  # Events for every action in administration part
   class Cms9Events
-
     def create_event(event_type, event_id, action, user, del_name)
-      post_definition_id = nil
-      post_id = nil
+      @post_definition_id = nil
+      @post_id = nil
 
-      user_info = [ user.id, user.email ? user.email : nil ]
+      check_event_type(event_type, event_id)
 
-      case event_type
-        when 'post_definition'
-          post_definition_id = event_id
-        when 'post'
-          post_id = event_id
-      end
+      @event = Event.new(
+        user: [user.id, user.email ? user.email : nil], action: action,
+        post_definition_id: @post_definition_id, post_id: @post_id,
+        deleted_field: del_name
+      )
 
-      @event = Event.new({
-        'user': user_info,
-        'action': action,
-        'post_definition_id': post_definition_id,
-        'post_id': post_id,
-        'deleted_field': del_name
-      })
-
-      if @event.save
-        if del_name != nil
-          if event_type == 'post_definition'
-            Event.where(post_definition_id: post_definition_id).update_all(deleted_field: del_name)
-          elsif event_type == 'post'
-            Event.where(post_id: post_id).each do |event|
-              event.update(deleted_field: del_name)
-            end
-          end
-        end
-      end
+      after_save(event_type) if @event.save && !del_name.nil?
     end
 
     def get_title_value_for_post(post_id)
-      return @post = Cms9::Field.where(post_id: post_id)[0]
+      @post = Cms9::Field.where(post_id: post_id)[0]
     end
 
     def timeline_events(limit)
@@ -44,6 +25,25 @@ module Cms9
         Event.order('created_at desc').limit(limit)
       else
         Event.order('created_at desc')
+      end
+    end
+
+    def after_save(event_type)
+      if event_type == 'post_definition'
+        Event.where(post_definition_id: @post_definition_id)
+             .update_all(deleted_field: @event.deleted_field)
+      elsif event_type == 'post'
+        Event.where(post_id: @post_id)
+             .update_all(deleted_field: @event.deleted_field)
+      end
+    end
+
+    def check_event_type(event_type, event_id)
+      case event_type
+      when 'post_definition'
+        @post_definition_id = event_id
+      when 'post'
+        @post_id = event_id
       end
     end
   end

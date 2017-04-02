@@ -1,4 +1,5 @@
 module Cms9
+  # ckeditor attachment model
   class Ckeditor::AttachmentFile < Ckeditor::Asset
     validates_property :ext, of: :data, in: attachment_file_types unless attachment_file_types.empty?
 

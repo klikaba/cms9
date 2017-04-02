@@ -1,15 +1,17 @@
+# ckeditor config file
 module Cms9
   Ckeditor.setup do |config|
     # ==> ORM configuration
-    # Load and configure the ORM. Supports :active_record (default), :mongo_mapper and
+    # Load and configure the ORM. Supports :active_record (default),
+    # :mongo_mapper and
     # :mongoid (bson_ext recommended) by default. Other ORMs may be
     # available as additional gems.
-    require "ckeditor/orm/active_record"
+    require 'ckeditor/orm/active_record'
 
     # Allowed image file types for upload.
     # Set to nil or [] (empty array) for all file types
     # By default: %w(jpg jpeg png gif tiff)
-    # config.image_file_types = %w(jpg jpeg png gif tiff)
+    config.image_file_types = %w(jpg jpeg png gif tiff)
 
     # Allowed flash file types for upload.
     # Set to nil or [] (empty array) for all file types
@@ -19,7 +21,8 @@ module Cms9
     # Allowed attachment file types for upload.
     # Set to nil or [] (empty array) for all file types
     # By default: %w(doc docx xls odt ods pdf rar zip tar tar.gz swf)
-    # config.attachment_file_types = %w(doc docx xls odt ods pdf rar zip tar tar.gz swf)
+    # config.attachment_file_types =
+    # %w(doc docx xls odt ods pdf rar zip tar tar.gz swf)
 
     # Setup authorization to be run as a before filter
     # By default: there is no authorization.
@@ -41,7 +44,8 @@ module Cms9
     # By default: nil
     # config.asset_path = "http://www.example.com/assets/ckeditor/"
 
-    # To reduce the asset precompilation time, you can limit plugins and/or languages to those you need:
+    # To reduce the asset precompilation time, you can limit plugins and/or
+    # languages to those you need:
     # By default: nil (no limit)
     # config.assets_languages = ['en', 'uk']
     # config.assets_plugins = ['image', 'smiley']
