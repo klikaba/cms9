@@ -1,6 +1,7 @@
-require "cms9/engine"
-require "dragonfly"
+require 'cms9/engine'
+require 'dragonfly'
 
+# main cms9 module
 module Cms9
   class << self
     attr_accessor :configuration
@@ -10,7 +11,7 @@ module Cms9
     self.configuration ||= Configuration.new
     yield(configuration)
   end
-
+  # configuration
   class Configuration
     attr_accessor :current_user, :destroy_user_session
 
@@ -21,4 +22,4 @@ module Cms9
   end
 end
 
-require "sdk/cms9"
+require 'sdk/cms9'
