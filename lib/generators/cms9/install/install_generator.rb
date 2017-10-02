@@ -63,7 +63,6 @@ module Cms9
         puts "  *     Visit \033[32mhttps://github.com/klikaba/cms9\033[0m for more informations       *"
         puts "  *                                                                       *"
         puts "  *************************************************************************\n\n"
-        binding.pry
       end
 
       private
